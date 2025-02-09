@@ -1,2 +1,2 @@
 # bulkRNASeq_pipeline
-Data analysis pipelines
+Lilab Data analysis pipelines
