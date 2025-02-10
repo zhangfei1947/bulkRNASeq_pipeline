@@ -3,6 +3,7 @@
 
 # Initialize new project
 #mkdir my_project && cd my_project
+#cp /scratch/group/lilab/Phil/bulkRNASeq_pipeline/run.pipeline.sh .
 #cp /path/to/pipeline/template_config.yaml config.yaml
 # Edit config.yaml
 
@@ -16,6 +17,6 @@ pipeline_dir=/scratch/group/lilab/Phil/bulkRNASeq_pipeline
 # Submit to SLURM
 snakemake --snakefile ${pipeline_dir}/Snakefile \
     --configfile config.yaml \
-    --cluster "sbatch -t {resources.runtime} --mem {resources.mem_mb} -c {threads} -J {rule} -o logs/slurm/{rule}_{wildcards} -e logs/slurm/{rule}_{wildcards}" \
+    --cluster-generic-submit-cmd "sbatch -t {resources.runtime} --mem {resources.mem_mb} -c {threads} -J {rule} -o logs/slurm/{rule}_{wildcards} -e logs/slurm/{rule}_{wildcards}" \
     -j 30 --latency-wait 60
 

@@ -3,7 +3,7 @@ rule featurecounts:
         bams = expand("03.Alignment_hisat2/{sample}/{sample}.sorted.bam", sample=config['samples']),
         anno = config['genome']['annotation']
     output:
-        "04.Quantification/counts_raw.tsv"
+        "04.Quant_featureCounts/counts_raw.tsv"
     log:
         "logs/quant/featurecounts.log"
     threads: 2
