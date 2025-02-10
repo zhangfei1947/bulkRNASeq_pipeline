@@ -34,7 +34,7 @@ enrichment:
     databases: ["BP", "MF", "CC"]
     fdr_cutoff: 0.05
   KEGG:
-    org_db: "hsa"
+    org_db: "Dm"
     fdr_cutoff: 0.1
 
 genome:
