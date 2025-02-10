@@ -1,3 +1,5 @@
+localrules: featurecounts
+
 rule featurecounts:
     input:
         bams = expand("03.Alignment_hisat2/{sample}/{sample}.sorted.bam", sample=config['samples']),

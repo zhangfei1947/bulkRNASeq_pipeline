@@ -1,3 +1,5 @@
+localrules: hisat2_align
+
 rule hisat2_align:
     input:
         r1 = "02.QC_fastp/{sample}_R1.clean.fastq.gz",
@@ -8,10 +10,7 @@ rule hisat2_align:
         "03.Alignment_hisat2/{sample}/{sample}.bam.bai"
     log:
         "logs/align/{sample}.log"
-    threads: 4
-    resources:
-        mem_mb=8000,
-        runtime=90
+    threads: 2
     params:
         index = config['genome']['index'],
         splicesites = config['genome']['splicesites'],

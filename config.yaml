@@ -1,0 +1,52 @@
+samples:
+  grp_d1_h1:
+    raw_dir: /scratch/group/lilab/Lilab_Seq_Data/250107_novogene_RNAseq/d1_grp_h1
+    raw_base: d1_grp_h1
+    group: grp_d1_h
+  grp_d1_h2:
+    raw_dir: /scratch/group/lilab/Lilab_Seq_Data/250107_novogene_RNAseq/d1_grp_h2
+    raw_base: d1_grp_h2
+    group: grp_d1_h
+  grp_d1_h3:
+    raw_dir: /scratch/group/lilab/Lilab_Seq_Data/250107_novogene_RNAseq/d1_grp_h3
+    raw_base: d1_grp_h3
+    group: grp_d1_h
+  grp_d7_h1:
+    raw_dir: /scratch/group/lilab/Lilab_Seq_Data/250107_novogene_RNAseq/d7_grp_h1
+    raw_base: d7_grp_h1
+    group: grp_d7_h
+  grp_d7_h2:
+    raw_dir: /scratch/group/lilab/Lilab_Seq_Data/250107_novogene_RNAseq/d7_grp_h2
+    raw_base: d7_grp_h2
+    group: grp_d7_h
+  grp_d7_h3:
+    raw_dir: /scratch/group/lilab/Lilab_Seq_Data/250107_novogene_RNAseq/d7_grp_h3
+    raw_base: d7_grp_h3
+    group: grp_d7_h
+
+align:
+  - Cx: xxx
+
+
+diff_comparisons:
+  - Control_vs_Treatment:
+      numerator: Treatment
+      denominator: Control
+
+venn_genes:
+  - DE_genes: ["Control_vs_Treatment"]
+  - Top_expressed: ["TPM > 100"]
+
+enrichment:
+  GO:
+    databases: ["BP", "MF", "CC"]
+    fdr_cutoff: 0.05
+  KEGG:
+    org_db: "Dm"
+    fdr_cutoff: 0.1
+
+genome:
+  index: /scratch/group/lilab/Genome_Reference/dmel_r6.55/dmel_r6.55
+  annotation: /scratch/group/lilab/Genome_Reference/dmel_r6.55/dmel-all-r6.55.gtf
+  splicesites: /scratch/group/lilab/Genome_Reference/dmel_r6.55/dmel-all-r6.55.hisat2.splice_sites
+  geneanno: /scratch/group/lilab/Genome_Reference/dmel_r6.55/gene_annotations.tsv

@@ -1,3 +1,5 @@
+localrules: fastp_qc, qc_summary
+
 rule fastp_qc:
     input:
         r1 = "01.Rawdata/{sample}_R1.fq.gz",
@@ -10,12 +12,6 @@ rule fastp_qc:
     log:
         "logs/qc/{sample}.log"
     threads: 2
-    resources:
-        nodes=1,
-        tasks=2,
-        cpus_per_task=1,
-        mem_mb=2048,
-        runtime=60
     shell:
         """
         module load GCC/11.2.0 fastp/0.23.2
