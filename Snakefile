@@ -1,6 +1,5 @@
-configfile: "config.yaml"
-
 use envmodules: True
+configfile: "config.yaml"
 
 # Include modules
 include: "workflow/rules/preprocess.smk"

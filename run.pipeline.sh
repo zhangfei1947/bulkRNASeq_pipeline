@@ -15,6 +15,6 @@ pipeline_dir=/scratch/group/lilab/Phil/bulkRNASeq_pipeline
 # Submit to SLURM
 snakemake --snakefile ${pipeline_dir}/Snakefile \
     --configfile config.yaml \
-    --cluster-generic-submit-cmd "sbatch -t {resources.runtime} --mem {resources.mem_mb} -c {threads} -J {rule} -o logs/slurm/{rule}_{wildcards} -e logs/slurm/{rule}_{wildcards}" \
+    --executor slurm \
     -j 30 --latency-wait 60
 
