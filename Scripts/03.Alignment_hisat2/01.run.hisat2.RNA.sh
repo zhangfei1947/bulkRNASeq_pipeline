@@ -2,12 +2,13 @@
 
 HISAT2IDX=/scratch/group/lilab/Genome_Reference/dmel_r6.55/dmel_r6.55
 splicesites=/scratch/group/lilab/Genome_Reference/dmel_r6.55/dmel-all-r6.55.hisat2.splice_sites
-rawdata_dir=/scratch/group/lilab/Phil/20250107_isogrp/01.RawData
-cleandata_dir=/scratch/group/lilab/Phil/20250107_isogrp/02.CleanData
-mapping_dir=/scratch/group/lilab/Phil/20250107_isogrp/03.Alignment
 
+pj_dir=YOUR_PROJECT_DIRECTORY
+rawdata_dir=${pj_dir}/01.RawData
+cleandata_dir=${pj_dir}/02.CleanData_fastp
+mapping_dir=${pj_dir}/03.Alignment_hisat2
 
-for spname in ${rawdata_dir}/*_*; 
+for spname in ${rawdata_dir}/*; 
 do
 	spname=$(basename "$spname")
 	fq1=${cleandata_dir}/${spname}_1.fq.gz

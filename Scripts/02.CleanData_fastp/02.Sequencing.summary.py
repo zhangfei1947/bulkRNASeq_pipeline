@@ -1,7 +1,6 @@
-import re
+import sys, re
 import pandas as pd
 from pathlib import Path
-import sys
 import matplotlib.pyplot as plt
 
 def parse_fastp_log(log_string):
@@ -83,7 +82,7 @@ def plot_duplication_rates(df):
     plt.savefig('duplication_rates_boxplot.png')
     plt.show()
 
-# Example usage:
+
 input_dir = sys.argv[1]
 summary_df = summarize_fastp_logs(input_dir)
 

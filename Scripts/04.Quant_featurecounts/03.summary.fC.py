@@ -1,6 +1,4 @@
-import re
-import os
-import sys
+import sys, re, os
 import matplotlib.pyplot as plt
 
 def extract_sample_name_and_assigned_rate(log_file):

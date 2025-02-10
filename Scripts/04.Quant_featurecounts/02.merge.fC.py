@@ -1,7 +1,5 @@
-import glob
-import os
+import sys, os, glob
 import pandas as pd
-import sys
 
 quant_dir = sys.argv[1]
 

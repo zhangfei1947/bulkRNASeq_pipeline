@@ -18,7 +18,7 @@ fastp \
   --in2 $fq2 \
   --out1 $cleanfq1 \
   --out2 $cleanfq2 \
-  --html ${spname}.fastp.html \
+  --html log/${spname}.fastp.html \
   --report_title ${spname} \
   --thread 2
 

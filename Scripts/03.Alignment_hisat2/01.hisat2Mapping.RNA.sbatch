@@ -22,6 +22,6 @@ hisat2 \
  --summary-file ${outdir}/${spname}.summary \
  --no-unal \
  -p 4 \
- | samtools view -bS 2> ${outdir}/samview.log | samtools sort -n -o ${outdir}/${spname}.sorted.bam 2> ${outdir}/samsort.log
+ | samtools view -bS 2> ${outdir}/samview.log | samtools sort -o ${outdir}/${spname}.sorted.bam 2> ${outdir}/samsort.log
 
  echo $(date) done.main.process

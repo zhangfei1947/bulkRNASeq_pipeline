@@ -1,8 +1,8 @@
 #!/bin/bash
 
-quanpath=/scratch/group/lilab/Phil/20250107_isogrp/04.Quantification
-
-output_file="/scratch/group/lilab/Phil/20250107_isogrp/05.Normalization_DESeq2/sampleinfo.csv"
+pj_dir=YOUR_PROJECT_DIRECTORY
+quanpath=${pj_dir}/04.Quant_featurecounts
+output_file="${pj_dir}/05.Normalization_DESeq2/sampleinfo.csv"
 
 if [ -e "$output_file" ]; then
     echo "Error: $output_file already exists. Please remove it or choose a different output file."

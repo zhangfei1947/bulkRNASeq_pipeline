@@ -1,10 +1,13 @@
 #!/bin/bash
 
 refgtf=/scratch/group/lilab/Genome_Reference/dmel_r6.55/dmel-all-r6.55.gtf
-mapping_dir=/scratch/group/lilab/Phil/20250107_isogrp/03.Alignment
-quant_dir=/scratch/group/lilab/Phil/20250107_isogrp/04.Quantification
 
-for spname in ${mapping_dir}/*_*; 
+pj_dir=YOUR_PROJECT_DIRECTORY
+rawdata_dir=${pj_dir}/01.RawData
+mapping_dir=${pj_dir}/03.Alignment_hisat2
+quant_dir=${pj_dir}/04.Quant_featurecounts
+
+for spname in ${rawdata_dir}/*; 
 do
     spname=$(basename "$spname")
     sortbam=${mapping_dir}/${spname}/${spname}.sorted.bam

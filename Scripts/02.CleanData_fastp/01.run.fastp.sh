@@ -1,8 +1,10 @@
 #!/bin/bash
 
-rawdata_dir=/scratch/group/lilab/Phil/20250107_isogrp/01.RawData
-cleandata_dir=/scratch/group/lilab/Phil/20250107_isogrp/02.CleanData
-for spname in ${rawdata_dir}/*_*_*; do
+pj_dir=YOUR_PROJECT_DIRECTORY
+rawdata_dir=${pj_dir}/01.RawData
+cleandata_dir=${pj_dir}/02.CleanData_fastp
+
+for spname in ${rawdata_dir}/*; do
 	spname=$(basename "$spname") 
 	fq1=$(ls -d ${rawdata_dir}/${spname}/*_1.fq.gz 2>/dev/null)
 	fq2=$(ls -d ${rawdata_dir}/${spname}/*_2.fq.gz 2>/dev/null)
