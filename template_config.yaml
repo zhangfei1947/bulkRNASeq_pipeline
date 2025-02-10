@@ -18,6 +18,8 @@ samples:
     raw_dir: /scratch/group/lilab/Lilab_Seq_Data/250107_novogene_RNAseq/d7_grp_h3
     group: grp_d7_h
 
+align:
+  - Cx: xxx
 
 
 diff_comparisons:

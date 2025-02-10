@@ -4,7 +4,7 @@ rule hisat2_align:
         r2 = "02.QC_fastp/{sample}/{sample}_R2.clean.fastq.gz"
     output:
         "03.Alignment_hisat2/{sample}/{sample}.sorted.bam",
-        "03.Alignment_hisat2/{sample}/{sample}.summary"，
+        "03.Alignment_hisat2/{sample}/{sample}.summary",
         "03.Alignment_hisat2/{sample}/{sample}.bam.bai"
     log:
         "logs/align/{sample}.log"
@@ -15,7 +15,7 @@ rule hisat2_align:
     params:
         index = config['genome']['index'],
         splicesites = config['genome']['splicesites'],
-        extra = config['align_params']
+        extra = config['align']
     shell:
         """
         module load Anaconda3/2024.02-1

@@ -8,7 +8,7 @@ rule featurecounts:
         "logs/quant/featurecounts.log"
     threads: 2
     params:
-        strand = 2 if config['stranded'] else 1
+        strand = 2
     shell:
         """
         module load GCC/12.3.0 Subread/2.0.8
