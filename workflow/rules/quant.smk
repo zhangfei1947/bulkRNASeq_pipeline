@@ -2,7 +2,7 @@ localrules: featurecounts
 
 rule featurecounts:
     input:
-        bams = expand("03.Alignment_hisat2/{sample}/{sample}.sorted.bam", sample=config['samples']),
+        bams = expand("03.Alignment_hisat2/{sample}/{sample}.bam", sample=config['samples']),
         anno = config['genome']['annotation']
     output:
         "04.Quant_featureCounts/counts_raw.tsv"
