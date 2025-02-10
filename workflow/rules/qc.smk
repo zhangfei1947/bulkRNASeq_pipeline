@@ -13,8 +13,6 @@ rule fastp_qc:
     resources:
         mem_mb=2048,
         runtime=60
-    params:
-        extra = config['qc_params']
     shell:
         """
         module load GCC/11.2.0 fastp/0.23.2
