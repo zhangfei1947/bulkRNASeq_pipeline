@@ -1,16 +1,20 @@
 rule fastp_qc:
     input:
-        r1 = "01.Rawdata/{sample}/*_1.fq.gz",
-        r2 = "01.Rawdata/{sample}/*_2.fq.gz"
+        r1 = "01.Rawdata/{sample}_R1.fq.gz",
+        r2 = "01.Rawdata/{sample}_R2.fq.gz"
     output:
-        r1_clean = "02.QC_fastp/{sample}/{sample}_R1.clean.fastq.gz",
-        r2_clean = "02.QC_fastp/{sample}/{sample}_R2.clean.fastq.gz",
+        r1_clean = "02.QC_fastp/{sample}_R1.clean.fastq.gz",
+        r2_clean = "02.QC_fastp/{sample}_R2.clean.fastq.gz",
         html = "02.QC_fastp/reports/{sample}.html",
         json = "02.QC_fastp/reports/{sample}.json",
     log:
         "logs/qc/{sample}.log"
     threads: 2
     resources:
+        slurm_account=132737777404,
+        nodes=1,
+        tasks=2,
+        cpus_per_task=1,
         mem_mb=2048,
         runtime=60
     shell:
