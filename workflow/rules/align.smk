@@ -5,7 +5,7 @@ rule hisat2_align:
         r1 = "02.QC_fastp/{sample}_R1.clean.fastq.gz",
         r2 = "02.QC_fastp/{sample}_R2.clean.fastq.gz"
     output:
-        "03.Alignment_hisat2/{sample}/{sample}.sorted.bam",
+        "03.Alignment_hisat2/{sample}/{sample}.bam",
         "03.Alignment_hisat2/{sample}/{sample}.summary",
         "03.Alignment_hisat2/{sample}/{sample}.bam.bai"
     log:
@@ -28,6 +28,6 @@ rule hisat2_align:
             -1 {input.r1} -2 {input.r2} 2> {log} |
         samtools view -@ {threads} -Sb |
         samtools sort -@ {threads} -o {output[0]}
-        samtools index {output[0].replace('.sorted', '')}
+        samtools index {output[0]}
         """
 
