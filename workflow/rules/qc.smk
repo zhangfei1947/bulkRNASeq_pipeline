@@ -11,7 +11,6 @@ rule fastp_qc:
         "logs/qc/{sample}.log"
     threads: 2
     resources:
-        slurm_account=132737777404,
         nodes=1,
         tasks=2,
         cpus_per_task=1,
