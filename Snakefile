@@ -1,4 +1,3 @@
-use envmodules: True
 configfile: "config.yaml"
 
 # Include modules
