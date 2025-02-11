@@ -1,4 +1,4 @@
-localrules: hisat2_summary，mapping_plot
+localrules: hisat2_summary, bmapping_plot
 
 rule hisat2_align:
     input:
