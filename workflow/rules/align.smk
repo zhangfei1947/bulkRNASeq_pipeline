@@ -22,8 +22,7 @@ rule hisat2_align:
         extra = config['align']
     shell:
         """
-        module load Anaconda3/2024.02-1
-        source activate hisat2
+        module load GCC/13.2.0  OpenMPI/4.1.6 HISAT2/2.2.1 SAMtools/1.21
 
         hisat2 -x {params.index} --known-splicesite-infile {params.splicesites} \
             -p {threads} \
