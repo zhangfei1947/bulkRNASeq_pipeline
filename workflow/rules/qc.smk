@@ -2,11 +2,11 @@ localrules: qc_summary
 
 rule fastp_qc:
     input:
-        r1 = "01.Rawdata/{sample}_R1.fq.gz",
-        r2 = "01.Rawdata/{sample}_R2.fq.gz"
+        r1 = "01.Rawdata/{sample}/{sample}_R1.fq.gz",
+        r2 = "01.Rawdata/{sample}/{sample}_R2.fq.gz"
     output:
-        r1_clean = "02.QC_fastp/{sample}_R1.clean.fastq.gz",
-        r2_clean = "02.QC_fastp/{sample}_R2.clean.fastq.gz",
+        r1_clean = "02.QC_fastp/{sample}/{sample}_R1.clean.fastq.gz",
+        r2_clean = "02.QC_fastp/{sample}/{sample}_R2.clean.fastq.gz",
         html = "02.QC_fastp/reports/{sample}.html",
         json = "02.QC_fastp/reports/{sample}.json",
     log:
@@ -51,6 +51,6 @@ rule qc_summary:
         done
         
         # Generate MultiQC report
-        multiqc 02.QC/reports/ -o 02.QC/
+        multiqc 02.QC_fastp/reports/ -o 02.QC_fastp/
         """
 

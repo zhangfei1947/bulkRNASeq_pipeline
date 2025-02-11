@@ -11,8 +11,8 @@ rule make_links:
             f"{config['samples'][wildcards.sample]['raw_base']}_2.fq.gz"
         )
     output:
-        r1 = "01.Rawdata/{sample}_R1.fq.gz",
-        r2 = "01.Rawdata/{sample}_R2.fq.gz"
+        r1 = "01.Rawdata/{sample}/{sample}_R1.fq.gz",
+        r2 = "01.Rawdata/{sample}/{sample}_R2.fq.gz"
     params:
         raw_base = lambda wildcards: config['samples'][wildcards.sample]['raw_base']
     shell:
