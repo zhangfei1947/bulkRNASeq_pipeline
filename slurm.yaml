@@ -1,13 +1,2 @@
-__default__:
-  account: philzhang 
-  time: "01:00:00"
-  mem_mb: 2048
-  output: "logs/slurm/{rule}_{wildcards}.out"
-  error: "logs/slurm/{rule}_{wildcards}.err"
 
-jobs:
-  - "hisat2_align":
-      time: "02:00:00"
-      mem_mb: 8000
-      threads: 4
 

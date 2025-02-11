@@ -30,4 +30,11 @@ rule hisat2_align:
         samtools sort -@ {threads} -o {output[0]}
         samtools index {output[0]}
         """
-
+rule hisat2_summary:
+    input:
+        "03.Alignment_hisat2/{sample}/{sample}.summary"
+    output:
+        "03.Alignment_hisat2/mapping.summary"
+    shell:
+        """
+        

@@ -1,4 +1,4 @@
-localrules: fastp_qc, qc_summary
+localrules: qc_summary
 
 rule fastp_qc:
     input:

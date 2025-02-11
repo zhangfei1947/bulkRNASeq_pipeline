@@ -1,4 +1,3 @@
-localrules: featurecounts
 
 rule featurecounts:
     input:
