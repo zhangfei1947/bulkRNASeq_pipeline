@@ -13,7 +13,7 @@ rule fastp_qc:
         "logs/qc/{sample}.log"
     threads: 2
     resources:
-        mem_mb = 2000,
+        mem_mb = 4000,
         runtime = 30,
         nodes = 1,
         ntasks_per_node = 2

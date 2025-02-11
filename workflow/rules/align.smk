@@ -1,4 +1,4 @@
-localrules: hisat2_summary
+localrules: hisat2_summary，mapping_plot
 
 rule hisat2_align:
     input:
@@ -10,12 +10,12 @@ rule hisat2_align:
         "03.Alignment_hisat2/{sample}/{sample}.bam.bai"
     log:
         "logs/align/{sample}.log"
-    threads: 2
+    threads: 4
     resources:
-        mem_mb = 4000,
+        mem_mb = 8000,
         runtime = 60,
         nodes = 1,
-        ntasks_per_node = 2
+        ntasks_per_node = 4
     params:
         index = config['genome']['index'],
         splicesites = config['genome']['splicesites'],
@@ -35,12 +35,76 @@ rule hisat2_align:
         samtools sort -@ {threads} -o {output[0]}
         samtools index {output[0]}
         """
-#rule hisat2_summary:
-#    input:
-#        "03.Alignment_hisat2/{sample}/{sample}.summary"
-#    output:
-#        "03.Alignment_hisat2/mapping.summary"
-#    shell:
-#        """
-#	echo test
-#        """
+
+rule hisat2_summary:
+    input:
+        expand("03.Alignment_hisat2/{sample}/{sample}.summary", sample=config['samples'])
+    output:
+        "03.Alignment_hisat2/mapping.summary"
+    shell:
+        """
+        # Define output file name
+        output_file="{output[0]}"
+        
+        # Initialize output file and add header
+        echo "Sample Name\tTotal Reads\tExact Match Rate\tMultiple Match Rate" > $output_file
+        
+        # Loop through all summary files
+        for file in */*.summary; do
+            # Extract sample name
+            sample_name=$(basename "$file" | sed 's/\.summary//')
+            
+            # Extract total reads
+            total_reads=$(grep -oP '^\d+ reads' "$file" | awk '{print $1}')
+            
+            # Extract exact match rate
+            exact_match_rate=$(grep -oP '(?<=aligned concordantly exactly 1 time)\s+\d+(\.\d+)%' "$file")
+            
+            # Extract multiple match rate
+            multiple_match_rate=$(grep -oP '(?<=aligned concordantly >1 times)\s+\d+(\.\d+)%' "$file")
+            
+            # Append extracted data to output file
+            echo "$sample_name\t$total_reads\t$exact_match_rate\t$multiple_match_rate" >> $output_file
+        done
+        
+        echo "Summarized files have been combined into $output_file"
+        """
+
+rule mapping_plot:
+    input:
+        "03.Alignment_hisat2/mapping.summary"
+    output:
+        "03.Alignment_hisat2/mappingrate.boxplot.png"
+    shell:
+        """
+        module load GCC/12.2.0 OpenMPI/4.1.4 R/4.3.1
+        export R_LIBS_USER="/scratch/group/lilab/software/R_library/4.3"
+
+        Rscript -e '
+        library(ggplot2)
+        data <- read.table("mapping.summary", header=TRUE, sep = "\t")
+        # Create boxplot
+        p <- ggplot(data, aes(x="", y=Exact.Match.Rate)) +
+          geom_boxplot(fill = "skyblue") +
+          theme_minimal() +
+          labs(title = "Boxplot of Exact Match Rate",
+               x = "",
+               y = "Exact Match Rate (%)") +
+          theme(axis.text.x = element_blank(),
+                axis.title.x = element_blank(),
+                axis.text.x = element_text(angle = 45, hjust = 1))
+        # Add text labels for the three lowest points
+        outliers <- subset(data, Exact.Match.Rate %in% c(min(Exact.Match.Rate, na.rm = TRUE), 
+                                                       min(Exact.Match.Rate, na.rm = TRUE),
+                                                       min(Exact.Match.Rate, na.rm = TRUE)))
+        p <- p + geom_text(aes(label=Sample.Name, y=Exact.Match.Rate), vjust=-0.5)  
+        # Save the plot as PNG
+        ggsave("mappingrate.boxplot.png", plot=p, width=6, height=6, dpi=300)
+        '
+        """
+
+
+
+
+
+
