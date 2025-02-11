@@ -29,8 +29,8 @@ include: "workflow/rules/quant.smk"
 
 rule all:
     input:
-        "03.Alignment_hisat2/mappingrate.boxplot.png"
-        "04.Quant_featureCounts/counts_raw.tsv"
+        "03.Alignment_hisat2/mappingrate.boxplot.png",
+        "04.Quant_featureCounts/counts_raw.tsv",
 #        expand("05.Normalized/counts_normalized.tsv", **config),
 #        #        expand("06.DEA/{comparison}_DE_results.tsv", comparison=config['diff_comparisons']),
 #        #        expand("07.Visualization/venn_diagram.pdf", **config),

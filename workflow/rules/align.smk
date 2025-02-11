@@ -2,8 +2,8 @@ localrules: hisat2_summary, bmapping_plot
 
 rule hisat2_align:
     input:
-        r1 = "02.QC_fastp/{sample}_R1.clean.fastq.gz",
-        r2 = "02.QC_fastp/{sample}_R2.clean.fastq.gz"
+        r1 = "02.QC_fastp/{sample}/{sample}_R1.clean.fastq.gz",
+        r2 = "02.QC_fastp/{sample}/{sample}_R2.clean.fastq.gz"
     output:
         "03.Alignment_hisat2/{sample}/{sample}.bam",
         "03.Alignment_hisat2/{sample}/{sample}.summary",

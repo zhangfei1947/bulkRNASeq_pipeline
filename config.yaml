@@ -7,10 +7,6 @@ samples:
     raw_dir: /scratch/group/lilab/Lilab_Seq_Data/250107_novogene_RNAseq/d1_grp_h2
     raw_base: d1_grp_h2
     group: grp_d1_h
-  grp_d1_h3:
-    raw_dir: /scratch/group/lilab/Lilab_Seq_Data/250107_novogene_RNAseq/d1_grp_h3
-    raw_base: d1_grp_h3
-    group: grp_d1_h
   grp_d7_h1:
     raw_dir: /scratch/group/lilab/Lilab_Seq_Data/250107_novogene_RNAseq/d7_grp_h1
     raw_base: d7_grp_h1
@@ -18,10 +14,6 @@ samples:
   grp_d7_h2:
     raw_dir: /scratch/group/lilab/Lilab_Seq_Data/250107_novogene_RNAseq/d7_grp_h2
     raw_base: d7_grp_h2
-    group: grp_d7_h
-  grp_d7_h3:
-    raw_dir: /scratch/group/lilab/Lilab_Seq_Data/250107_novogene_RNAseq/d7_grp_h3
-    raw_base: d7_grp_h3
     group: grp_d7_h
 
 align:
