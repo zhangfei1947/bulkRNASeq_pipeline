@@ -8,7 +8,7 @@ rule normalize_counts:
     resources:
         mem_mb = 2000,
         runtime = 30,
-        nodes = 1,
-        ntasks_per_node = 1
+        ntasks = 1，
+        cpus_per_task = 2
     script:
         "../scripts/norm.R "

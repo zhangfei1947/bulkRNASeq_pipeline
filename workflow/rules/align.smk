@@ -1,4 +1,4 @@
-localrules: hisat2_summary, bmapping_plot
+localrules: hisat2_summary, mapping_plot
 
 rule hisat2_align:
     input:
@@ -14,8 +14,8 @@ rule hisat2_align:
     resources:
         mem_mb = 8000,
         runtime = 60,
-        nodes = 1,
-        ntasks_per_node = 4
+        ntasks = 1，
+        cpus_per_task = 4
     params:
         index = config['genome']['index'],
         splicesites = config['genome']['splicesites'],

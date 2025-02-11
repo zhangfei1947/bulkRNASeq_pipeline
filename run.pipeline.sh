@@ -10,7 +10,10 @@
 
 
 #snakemake module
-module load GCC/12.2.0  OpenMPI/4.1.4 snakemake/7.32.3
+#module load GCC/12.2.0  OpenMPI/4.1.4 snakemake/7.32.3
+
+module load Anaconda3/2024.02-1
+source activate snakemake732
 
 pipeline_dir=/scratch/group/lilab/Phil/bulkRNASeq_pipeline
 
@@ -19,5 +22,5 @@ pipeline_dir=/scratch/group/lilab/Phil/bulkRNASeq_pipeline
 
 snakemake --snakefile ${pipeline_dir}/Snakefile \
     --configfile config.yaml \
-    --cluster "sbatch -t {resources.runtime} --mem {resources.mem_mb} -c {threads} -N {resources.nodes} -n {resources.ntasks_per_node} -J {rule}" \
-    -j 30 --latency-wait 60 --rerun-incomplete
+    --cluster "sbatch -t {resources.runtime} --mem {resources.mem_mb} -ntasks {resources.ntasks} -ncpus {resources.cpus_per_task} -J {rule}" \
+    -j 30 --latency-wait 60

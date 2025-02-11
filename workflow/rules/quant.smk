@@ -12,8 +12,8 @@ rule featurecounts:
     resources:
         mem_mb = 8000,
         runtime = 60,
-        nodes = 1,
-        ntasks_per_node = 4
+        ntasks = 1，
+        cpus_per_task = 4
     shell:
         """
         module load GCC/12.3.0 Subread/2.0.8
