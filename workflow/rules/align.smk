@@ -1,4 +1,4 @@
-localrules: hisat2_align
+localrules: hisat2_summary
 
 rule hisat2_align:
     input:
@@ -11,6 +11,11 @@ rule hisat2_align:
     log:
         "logs/align/{sample}.log"
     threads: 2
+    resources:
+        mem_mb = 4000,
+        runtime = 60,
+        nodes = 1,
+        ntasks_per_node = 2
     params:
         index = config['genome']['index'],
         splicesites = config['genome']['splicesites'],
@@ -30,11 +35,12 @@ rule hisat2_align:
         samtools sort -@ {threads} -o {output[0]}
         samtools index {output[0]}
         """
-rule hisat2_summary:
-    input:
-        "03.Alignment_hisat2/{sample}/{sample}.summary"
-    output:
-        "03.Alignment_hisat2/mapping.summary"
-    shell:
-        """
-        
+#rule hisat2_summary:
+#    input:
+#        "03.Alignment_hisat2/{sample}/{sample}.summary"
+#    output:
+#        "03.Alignment_hisat2/mapping.summary"
+#    shell:
+#        """
+#	echo test
+#        """

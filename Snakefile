@@ -1,6 +1,6 @@
-use envmodules: True
+envmodules: True
 
-configfile: "config.yaml"
+#configfile: "config.yaml"
 
 # Include modules
 # softlink rawdata 
