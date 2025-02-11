@@ -82,7 +82,7 @@ rule mapping_plot:
 
         Rscript -e '
         library(ggplot2)
-        data <- read.table("mapping.summary", header=TRUE, sep = "\t")
+        data <- read.table("{input}", header=TRUE, sep = "\t")
         # Create boxplot
         p <- ggplot(data, aes(x="", y=Exact.Match.Rate)) +
           geom_boxplot(fill = "skyblue") +
@@ -99,7 +99,7 @@ rule mapping_plot:
                                                        min(Exact.Match.Rate, na.rm = TRUE)))
         p <- p + geom_text(aes(label=Sample.Name, y=Exact.Match.Rate), vjust=-0.5)  
         # Save the plot as PNG
-        ggsave("mappingrate.boxplot.png", plot=p, width=6, height=6, dpi=300)
+        ggsave("{output}", plot=p, width=6, height=6, dpi=300)
         '
         """
 

@@ -21,9 +21,9 @@ align:
 
 
 diff_comparisons:
-  - Control_vs_Treatment:
-      numerator: Treatment
-      denominator: Control
+  - grp_d7_h_vs_grp_d1_h:
+      numerator: grp_d7_h
+      denominator: grp_d1_h
 
 venn_genes:
   - DE_genes: ["Control_vs_Treatment"]
