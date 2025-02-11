@@ -38,6 +38,7 @@ rule qc_summary:
         """
         # Generate tabular summary
         module load GCC/12.2.0  OpenMPI/4.1.4 MultiQC/1.14
+        alias jq="/scratch/group/lilab/software/jq-linux-i386"
 
         echo -e "Sample\tTotal_Reads\tQ20_R1\tQ20_R2\tGC_R1\tGC_R2" > {output[0]}
         for f in {input}; do
