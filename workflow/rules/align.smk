@@ -70,12 +70,13 @@ rule mapping_plot:
         "03.Alignment_hisat2/mapping.summary"
     output:
         "03.Alignment_hisat2/mappingrate.boxplot.png"
+    params:
+        srcpath = config['pipepath']/scripts
     shell:
         """
         module load GCC/12.2.0 OpenMPI/4.1.4 R/4.3.1
         export R_LIBS_USER="/scratch/group/lilab/software/R_library/4.3"
-        
-        Rscript {config['pipepath']}/scripts/maprate.plot.R {input} {output}
+        Rscript {params.srcpath}/maprate.plot.R {input} {output}
         """
 
 

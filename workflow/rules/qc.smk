@@ -56,11 +56,13 @@ rule duprate_plot:
         "02.QC_fastp/QC_summary_table.tsv"
     output:
         "02.QC_fastp/duprate.boxplot.png"
+    params:
+        srcpath = config['pipepath']/scripts
     shell:
         """
         module load GCC/12.2.0 OpenMPI/4.1.4 R/4.3.1
         export R_LIBS_USER="/scratch/group/lilab/software/R_library/4.3"
-        Rscript {config['pipepath']}/scripts/duprate.plot.R {input} {output}
+        Rscript {params.srcpath}/duprate.plot.R {input} {output}
         """
 
 

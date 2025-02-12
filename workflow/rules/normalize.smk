@@ -5,11 +5,19 @@ rule normalize_counts:
     output:
         normalized = "05.Normalization_DESeq2/counts_normalized.tsv",
         fpkm = "05.Normalization_DESeq2/fpkm_matrix.tsv"
+    params:
+        anno = config['genome']['annotation']
+        sample = lambda wildcards: config['samples'][wildcards.sample]
+        group = lambda wildcards: config['samples'][wildcards.sample]['group']
     resources:
         runtime = 30,
         nodes = 1,
         ntasks = 1,
         cpus_per_task= 1,
         mem_mb = 4000
-    script:
-        "../scripts/norm.R "
+    shell:
+        """
+        module load GCC/12.2.0 OpenMPI/4.1.4 R/4.3.1
+        export R_LIBS_USER="/scratch/group/lilab/software/R_library/4.3"
+        Rscript {params.srcpath}/norm.R {input} {output}
+        """

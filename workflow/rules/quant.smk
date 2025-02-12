@@ -34,3 +34,14 @@ rule featurecounts:
         -D 800 \
         {input} > {log} 2>&1
         """
+
+rule fc_summary:
+    input:
+        "logs/quant/featurecounts.log"
+    output:
+        "04.Quant_featureCounts/fc.summary"
+    shell:
+    """
+echo "sample\tassignrate" > {output}
+sed ':a;N;$!ba;s/\n//g' {input}| sed -e 's/Process BAM file /\n/g'|sed 1d|sed -e 's/.bam.*(/\t/g' -e 's/%.*//g' >> {output}
+    """
