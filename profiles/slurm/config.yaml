@@ -22,8 +22,8 @@ verbose: true
 
 
 use-singularity: false
-singularity-prefix: ".snakemake/singularity"
-singularity-args: "--bind /data"
+#singularity-prefix: ".snakemake/singularity"
+#singularity-args: "--bind /data"
 
 
 shadow-prefix: ".snakemake/shadow"
