@@ -15,7 +15,8 @@ rule fastp_qc:
     resources:
         runtime = 30,
         nodes = 1,
-        ntasks = 2,
+        ntasks = 1,
+        cpus_per_task= 2,
         mem_mb = 4000
     shell:
         """
