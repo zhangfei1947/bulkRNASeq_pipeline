@@ -31,15 +31,13 @@ rule qc_summary:
     input:
         expand("02.QC_fastp/reports/{sample}.json", sample=config['samples'])
     output:
-        "02.QC_fastp/QC_summary_table.tsv",
-        "02.QC_fastp/multiqc_report.html"
+        "02.QC_fastp/QC_summary_table.tsv"
     shell:
         """
         # Generate tabular summary
-        module load GCC/12.2.0  OpenMPI/4.1.4 MultiQC/1.14
         alias jq="/scratch/group/lilab/software/jq-linux-i386"
 
-        echo -e "Sample\tReads_brfore\tReads_after\tQ20_R1_before\tQ20_R2_before\tQ20_R1_after\tQ20_R2_after\tduplication_rate\tinsert_size" > {output[0]}
+        echo -e "Sample\tReads_brfore\tReads_after\tQ20_R1_before\tQ20_R2_before\tQ20_R1_after\tQ20_R2_after\tduplication_rate\tinsert_size" > {output}
         for f in {input}; do
             sample=$(basename $f .json)
             total_reads_b=$(jq '.summary.before_filtering.total_reads' $f)
@@ -50,11 +48,8 @@ rule qc_summary:
             q20a_r2=$(jq '.summary.after_filtering.q20_rate' $f)
             dup_rate=$(jq '.summary.duplication.rate' $f)
             insert_size=$(jq '.summary.insert_size.peak' $f)
-            echo -e "$sample\t$total_reads_b\t$total_reads_a\t$q20b_r1\t$q20b_r2\t$q20a_r1\t$q20a_r2\t$dup_rate\t$insert_size" >> {output[0]}
+            echo -e "$sample\t$total_reads_b\t$total_reads_a\t$q20b_r1\t$q20b_r2\t$q20a_r1\t$q20a_r2\t$dup_rate\t$insert_size" >> {output}
         done
-        
-        # Generate MultiQC report
-        multiqc 02.QC_fastp/reports/ -o 02.QC_fastp/
         """
 
 rule duprate_plot:
