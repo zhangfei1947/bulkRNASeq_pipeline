@@ -1,0 +1,30 @@
+# profiles/slurm/config.yaml
+
+cluster: "sbatch -t {resources.runtime} --mem {resources.mem_mb} --nodes {resources.nodes} --ntasks {resources.ntasks} --cpus-per-task {resources.cpus_per_task} -J {rule} -o logs/{rule}.%j.out -e logs/{rule}.%j.err"
+jobs: 50
+latency-wait: 60
+use-conda: false
+keep-going: true
+rerun-incomplete: true
+restart-times: 3
+
+
+default-resources:
+  runtime: "01:00:00"
+  mem_mb: 4096
+  nodes: 1
+  ntasks: 1
+  cpus_per_task: 1
+
+
+log-dir: "logs/{rule}"
+printshellcmds: true
+verbose: true
+
+
+use-singularity: false
+singularity-prefix: ".snakemake/singularity"
+singularity-args: "--bind /data"
+
+
+shadow-prefix: ".snakemake/shadow"

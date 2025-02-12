@@ -13,11 +13,8 @@ rule fastp_qc:
         "logs/qc/{sample}.log"
     threads: 2
     resources:
-        runtime = 30,
-        nodes = 1,
-        ntasks = 1,
         cpus_per_task= 2,
-        mem_mb = 4000
+        mem_mb = 4096
     shell:
         """
         module load GCC/11.2.0 fastp/0.23.2
@@ -57,12 +54,12 @@ rule duprate_plot:
     output:
         "02.QC_fastp/duprate.boxplot.png"
     params:
-        srcpath = config['pipepath']/scripts
+        pipepath = config['pipepath']
     shell:
         """
         module load GCC/12.2.0 OpenMPI/4.1.4 R/4.3.1
         export R_LIBS_USER="/scratch/group/lilab/software/R_library/4.3"
-        Rscript {params.srcpath}/duprate.plot.R {input} {output}
+        Rscript {params.pipepath}/scripts/duprate.plot.R {input} {output}
         """
 
 

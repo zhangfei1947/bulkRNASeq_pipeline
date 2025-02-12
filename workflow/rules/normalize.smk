@@ -9,12 +9,6 @@ rule normalize_counts:
         anno = config['genome']['annotation']
         sample = lambda wildcards: config['samples'][wildcards.sample]
         group = lambda wildcards: config['samples'][wildcards.sample]['group']
-    resources:
-        runtime = 30,
-        nodes = 1,
-        ntasks = 1,
-        cpus_per_task= 1,
-        mem_mb = 4000
     shell:
         """
         module load GCC/12.2.0 OpenMPI/4.1.4 R/4.3.1
