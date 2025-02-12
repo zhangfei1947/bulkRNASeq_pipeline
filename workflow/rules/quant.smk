@@ -33,4 +33,3 @@ rule featurecounts:
         -D 800 \
         {input.bams} > {log} 2>&1
         """
-

@@ -43,31 +43,31 @@ rule hisat2_summary:
         "03.Alignment_hisat2/mapping.summary"
     shell:
         """
-        # Define output file name
-        output_file="{output[0]}"
-        
-        # Initialize output file and add header
-        echo "Sample Name\tTotal Reads\tExact Match Rate\tMultiple Match Rate" > $output_file
-        
-        # Loop through all summary files
-        for file in */*.summary; do
-            # Extract sample name
-            sample_name=$(basename "$file" | sed 's/\.summary//')
-            
-            # Extract total reads
-            total_reads=$(grep -oP '^\d+ reads' "$file" | awk '{print $1}')
-            
-            # Extract exact match rate
-            exact_match_rate=$(grep -oP '(?<=aligned concordantly exactly 1 time)\s+\d+(\.\d+)%' "$file")
-            
-            # Extract multiple match rate
-            multiple_match_rate=$(grep -oP '(?<=aligned concordantly >1 times)\s+\d+(\.\d+)%' "$file")
-            
-            # Append extracted data to output file
-            echo "$sample_name\t$total_reads\t$exact_match_rate\t$multiple_match_rate" >> $output_file
-        done
-        
-        echo "Summarized files have been combined into $output_file"
+# Define output file name
+output_file="{output[0]}"
+
+# Initialize output file and add header
+echo "Sample Name\tTotal Reads\tExact Match Rate\tMultiple Match Rate" > $output_file
+
+# Loop through all summary files
+for file in 03.Alignment_hisat2/*/*.summary; do
+    # Extract sample name
+    sample_name=$(basename "$file" | sed 's/\.summary//')
+    
+    # Extract total reads
+    total_reads=$(grep -oP '^\d+ reads' "$file" | awk '{print $1}')
+    
+    # Extract exact match rate
+    exact_match_rate=$(grep -oP '(?<=aligned concordantly exactly 1 time)\s+\d+(\.\d+)%' "$file")
+    
+    # Extract multiple match rate
+    multiple_match_rate=$(grep -oP '(?<=aligned concordantly >1 times)\s+\d+(\.\d+)%' "$file")
+    
+    # Append extracted data to output file
+    echo "$sample_name\t$total_reads\t$exact_match_rate\t$multiple_match_rate" >> $output_file
+done
+
+echo "Summarized files have been combined into $output_file"
         """
 
 rule mapping_plot:
@@ -79,28 +79,8 @@ rule mapping_plot:
         """
         module load GCC/12.2.0 OpenMPI/4.1.4 R/4.3.1
         export R_LIBS_USER="/scratch/group/lilab/software/R_library/4.3"
-
-        Rscript -e '
-        library(ggplot2)
-        data <- read.table("{input}", header=TRUE, sep = "\t")
-        # Create boxplot
-        p <- ggplot(data, aes(x="", y=Exact.Match.Rate)) +
-          geom_boxplot(fill = "skyblue") +
-          theme_minimal() +
-          labs(title = "Boxplot of Exact Match Rate",
-               x = "",
-               y = "Exact Match Rate (%)") +
-          theme(axis.text.x = element_blank(),
-                axis.title.x = element_blank(),
-                axis.text.x = element_text(angle = 45, hjust = 1))
-        # Add text labels for the three lowest points
-        outliers <- subset(data, Exact.Match.Rate %in% c(min(Exact.Match.Rate, na.rm = TRUE), 
-                                                       min(Exact.Match.Rate, na.rm = TRUE),
-                                                       min(Exact.Match.Rate, na.rm = TRUE)))
-        p <- p + geom_text(aes(label=Sample.Name, y=Exact.Match.Rate), vjust=-0.5)  
-        # Save the plot as PNG
-        ggsave("{output}", plot=p, width=6, height=6, dpi=300)
-        '
+        
+        Rscript {config['samples']}/scripts/maprate.plot.R {input} {output}
         """
 
 

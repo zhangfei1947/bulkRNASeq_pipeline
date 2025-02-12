@@ -2,7 +2,7 @@ library(ggplot2)
 library(dplyr)
 args <- commandArgs(trailingOnly = TRUE)
 qc_table <- args[1]
-
+outplot <- args[2]
 
 data <- read.delim(qc_table, header = TRUE, sep = "\t")
 
@@ -22,4 +22,4 @@ ggplot(data, aes(x = "", y = duplication_rate, fill = Sample)) +
   theme(axis.text.x = element_blank(),
         axis.ticks.x = element_blank())
 
-ggsave("duprate.boxplot.png", width=6, height=6, dpi=300)
+ggsave(outplot, width=6, height=6, dpi=300)
