@@ -35,7 +35,7 @@ rule qc_summary:
     shell:
         """
         # Generate tabular summary
-        alias jq="/scratch/group/lilab/software/jq-linux-i386"
+        export alias jq="/scratch/group/lilab/software/jq-linux-i386"
         ../scripts/jq.qc.sum.sh 02.QC_fastp/reports {output}
         """
 
