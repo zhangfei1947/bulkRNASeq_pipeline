@@ -1,12 +1,9 @@
 #!/usr/bin/env Rscript
 
-args <- commandArgs(trailingOnly = TRUE)
-filtered_rc_file <- args[1]
-sample_info_file <- args[2]
-out_path <- args[3]
-anno_file <- args[4]
-
-input_file <- snakemake@input[[1]]
+input_file <- snakemake@input
+anno_file <- snakemake@params$anno
+sample <- snakemake@params$sample
+group <- snakemake@params$group
 output_norm <- snakemake@output$normalized
 output_fpkm <- snakemake@output$fpkm
 
@@ -14,8 +11,8 @@ output_fpkm <- snakemake@output$fpkm
 
 library(DESeq2)
 
-count_matrix <- read.table(filtered_rc_file,header=TRUE,row.names=1)
-sample_info <- read.table(sample_info_file,header=TRUE, row.names=1)
+count_matrix <- read.table(rc_file, skip=1, header=TRUE, row.names=1)
+sample_info <- read.table(sample_info_file, header=TRUE, row.names=1)
 
 #create DESeq2 object
 dds <- DESeqDataSetFromMatrix(countData=count_matrix, colData=sample_info, design=~condition)

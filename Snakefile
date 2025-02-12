@@ -30,7 +30,9 @@ include: "workflow/rules/quant.smk"
 rule all:
     input:
         "02.QC_fastp/QC_summary_table.tsv",
+        "02.QC_fastp/duprate.boxplot.png",
         "03.Alignment_hisat2/mapping.summary",
+        "03.Alignment_hisat2/mappingrate.boxplot.png",
         "04.Quant_featureCounts/counts_raw.tsv",
 #        expand("05.Normalized/counts_normalized.tsv", **config),
 #        expand("06.DEA/{comparison}_DE_results.tsv", comparison=config['diff_comparisons']),

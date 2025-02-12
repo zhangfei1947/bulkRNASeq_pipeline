@@ -2,12 +2,13 @@ localrules: fc_summary
 
 rule featurecounts:
     input:
-        bams = expand("03.Alignment_hisat2/{sample}/{sample}.bam", sample=config['samples']),
-        anno = config['genome']['annotation']
+        expand("03.Alignment_hisat2/{sample}/{sample}.bam", sample=config['samples'])
     output:
         "04.Quant_featureCounts/counts_raw.tsv"
     log:
         "logs/quant/featurecounts.log"
+    params:
+        anno = config['genome']['annotation']
     threads: 4
     resources:
         runtime = 60,
@@ -21,7 +22,7 @@ rule featurecounts:
 
         featureCounts \
         -T {threads} \
-        -a {input.anno} \
+        -a {params.anno} \
         -o {output} \
         -F GTF -t exon -g gene_id \
         -s 2 \
@@ -31,5 +32,5 @@ rule featurecounts:
         -P -B \
         -d 40 \
         -D 800 \
-        {input.bams} > {log} 2>&1
+        {input} > {log} 2>&1
         """
