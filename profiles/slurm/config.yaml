@@ -17,7 +17,6 @@ default-resources:
   cpus_per_task: 1
 
 
-log-dir: "logs/{rule}"
 printshellcmds: true
 verbose: true
 
