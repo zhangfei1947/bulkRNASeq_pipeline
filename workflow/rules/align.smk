@@ -10,12 +10,12 @@ rule hisat2_align:
         "03.Alignment_hisat2/{sample}/{sample}.bam.bai"
     log:
         "logs/align/{sample}.log"
-    threads: 4
+    threads: 6
     resources:
-        mem_mb = 8000,
-        runtime = 60,
-        ntasks = 1,
-        cpus_per_task = 4
+        runtime = 90,
+        nodes = 1,
+        ntasks = 6,
+        mem_mb = 10000
     params:
         index = config['genome']['index'],
         splicesites = config['genome']['splicesites'],

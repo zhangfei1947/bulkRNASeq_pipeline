@@ -1,20 +1,20 @@
 samples:
-  grp_d1_h1:
-    raw_dir: /scratch/group/lilab/Lilab_Seq_Data/250107_novogene_RNAseq/d1_grp_h1
-    raw_base: d1_grp_h1
-    group: grp_d1_h
-  grp_d1_h2:
-    raw_dir: /scratch/group/lilab/Lilab_Seq_Data/250107_novogene_RNAseq/d1_grp_h2
-    raw_base: d1_grp_h2
-    group: grp_d1_h
-  grp_d7_h1:
-    raw_dir: /scratch/group/lilab/Lilab_Seq_Data/250107_novogene_RNAseq/d7_grp_h1
-    raw_base: d7_grp_h1
-    group: grp_d7_h
-  grp_d7_h2:
-    raw_dir: /scratch/group/lilab/Lilab_Seq_Data/250107_novogene_RNAseq/d7_grp_h2
-    raw_base: d7_grp_h2
-    group: grp_d7_h
+  d1_grp_h1
+    read1: /scratch/group/lilab/Lilab_Seq_Data/250107_novogene_RNAseq/d1_grp_h1/d1_grp_h1_1.fq.gz
+    read2: /scratch/group/lilab/Lilab_Seq_Data/250107_novogene_RNAseq/d1_grp_h1/d1_grp_h1_2.fq.gz
+    group: d1_grp_h
+  d1_grp_h2
+    read1: /scratch/group/lilab/Lilab_Seq_Data/250107_novogene_RNAseq/d1_grp_h2/d1_grp_h2_1.fq.gz
+    read2: /scratch/group/lilab/Lilab_Seq_Data/250107_novogene_RNAseq/d1_grp_h2/d1_grp_h2_2.fq.gz
+    group: d1_grp_h
+  d7_grp_h1
+    read1: /scratch/group/lilab/Lilab_Seq_Data/250107_novogene_RNAseq/d7_grp_h1/d7_grp_h1_1.fq.gz
+    read2: /scratch/group/lilab/Lilab_Seq_Data/250107_novogene_RNAseq/d7_grp_h1/d7_grp_h1_2.fq.gz
+    group: d7_grp_h
+  d7_grp_h2
+    read1: /scratch/group/lilab/Lilab_Seq_Data/250107_novogene_RNAseq/d7_grp_h2/d7_grp_h2_1.fq.gz
+    read2: /scratch/group/lilab/Lilab_Seq_Data/250107_novogene_RNAseq/d7_grp_h2/d7_grp_h2_2.fq.gz
+    group: d7_grp_h
 
 align:
   - Cx: xxx

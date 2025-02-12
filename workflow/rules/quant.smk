@@ -10,10 +10,10 @@ rule featurecounts:
         "logs/quant/featurecounts.log"
     threads: 4
     resources:
-        mem_mb = 8000,
         runtime = 60,
-        ntasks = 1,
-        cpus_per_task = 4
+        nodes = 1,
+        ntasks = 4,
+        mem_mb = 4000
     shell:
         """
         module load GCC/12.3.0 Subread/2.0.8

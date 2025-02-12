@@ -6,9 +6,9 @@ rule normalize_counts:
         normalized = "05.Normalization_DESeq2/counts_normalized.tsv",
         fpkm = "05.Normalization_DESeq2/fpkm_matrix.tsv"
     resources:
-        mem_mb = 2000,
         runtime = 30,
+        nodes = 1,
         ntasks = 1,
-        cpus_per_task = 2
+        mem_mb = 2000
     script:
         "../scripts/norm.R "

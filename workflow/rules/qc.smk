@@ -13,10 +13,10 @@ rule fastp_qc:
         "logs/qc/{sample}.log"
     threads: 2
     resources:
-        mem_mb = 4000,
         runtime = 30,
-        ntasks = 1,
-        cpus_per_task = 2
+        nodes = 1,
+        ntasks = 2,
+        mem_mb = 4000
     shell:
         """
         module load GCC/11.2.0 fastp/0.23.2
@@ -60,7 +60,7 @@ rule duprate_plot:
     input:
         "02.QC_fastp/QC_summary_table.tsv"
     output:
-        "02.QC_fastp/duprate.boxplot.png.tsv"
+        "02.QC_fastp/duprate.boxplot.png"
     shell:
         """
         module load GCC/12.2.0 OpenMPI/4.1.4 R/4.3.1

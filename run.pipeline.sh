@@ -12,5 +12,5 @@ pipeline_dir=/scratch/group/lilab/Phil/bulkRNASeq_pipeline
 
 snakemake --snakefile ${pipeline_dir}/Snakefile \
     --configfile config.yaml \
-    --cluster "sbatch -t {resources.runtime} --mem {resources.mem_mb} -ntasks {resources.ntasks} -ncpus {resources.cpus_per_task} -J {rule}" \
+    --cluster "sbatch -t {resources.runtime} --mem {resources.mem_mb} --nodes {resources.nodes} --ntasks {resources.ntasks} -J {rule}" \
     -j 30 --latency-wait 60
