@@ -36,8 +36,8 @@ rule qc_summary:
         """
 export PATH="/scratch/group/lilab/software/jq:$PATH"
 
-echo -e "Sample\tReads_brfore\tReads_after\tQ20_R1_before\tQ20_R2_before\tQ20_R1_after\tQ20_R2_after\tduplication_rate\tinsert_size" > $2
-for f in $1/*json; do
+echo -e "Sample\tReads_brfore\tReads_after\tQ20_R1_before\tQ20_R2_before\tQ20_R1_after\tQ20_R2_after\tduplication_rate\tinsert_size" > {output}
+for f in 02.QC_fastp/reports/*json; do
     sample=$(basename $f .json)
     total_reads_b=$(jq '.summary.before_filtering.total_reads' $f)
     total_reads_a=$(jq '.summary.after_filtering.total_reads' $f)
@@ -47,7 +47,7 @@ for f in $1/*json; do
     q20a_r2=$(jq '.summary.after_filtering.q20_rate' $f)
     dup_rate=$(jq '.duplication.rate' $f)
     insert_size=$(jq '.insert_size.peak' $f)
-    echo -e "$sample\t$total_reads_b\t$total_reads_a\t$q20b_r1\t$q20b_r2\t$q20a_r1\t$q20a_r2\t$dup_rate\t$insert_size" >> $2
+    echo -e "$sample\t$total_reads_b\t$total_reads_a\t$q20b_r1\t$q20b_r2\t$q20a_r1\t$q20a_r2\t$dup_rate\t$insert_size" >> {output}
 done
         """
 

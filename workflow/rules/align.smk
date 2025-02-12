@@ -55,7 +55,7 @@ for file in 03.Alignment_hisat2/*/*.summary; do
     sample_name=$(basename "$file" | sed 's/\.summary//')
     
     # Extract total reads
-    total_reads=$(grep -oP '^\d+ reads' "$file" | awk '{print $1}')
+    total_reads=$(grep -oP '^\d+ reads' "$file" | cut -d " " -f1)
     
     # Extract exact match rate
     exact_match_rate=$(grep -oP '(?<=aligned concordantly exactly 1 time)\s+\d+(\.\d+)%' "$file")
