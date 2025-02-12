@@ -80,7 +80,7 @@ rule mapping_plot:
         module load GCC/12.2.0 OpenMPI/4.1.4 R/4.3.1
         export R_LIBS_USER="/scratch/group/lilab/software/R_library/4.3"
         
-        Rscript {config['samples']}/scripts/maprate.plot.R {input} {output}
+        Rscript {config['pipepath']}/scripts/maprate.plot.R {input} {output}
         """
 
 
