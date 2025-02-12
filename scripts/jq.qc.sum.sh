@@ -1,6 +1,6 @@
 #!/bin/bash
 
-alias jq="/scratch/group/lilab/software/jq-linux-i386"
+export jq="/scratch/group/lilab/software/jq-linux-i386"
 
 echo -e "Sample\tReads_brfore\tReads_after\tQ20_R1_before\tQ20_R2_before\tQ20_R1_after\tQ20_R2_after\tduplication_rate\tinsert_size" > $2
 for f in $1/*json; do
