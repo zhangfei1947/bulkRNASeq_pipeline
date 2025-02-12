@@ -9,6 +9,7 @@ rule normalize_counts:
         runtime = 30,
         nodes = 1,
         ntasks = 1,
-        mem_mb = 2000
+        cpus_per_task= 1,
+        mem_mb = 4000
     script:
         "../scripts/norm.R "

@@ -12,9 +12,10 @@ rule hisat2_align:
         "logs/align/{sample}.log"
     threads: 6
     resources:
-        runtime = 90,
+        runtime = 120,
         nodes = 1,
-        ntasks = 6,
+        ntasks = 1,
+        cpus_per_task= 6,
         mem_mb = 10000
     params:
         index = config['genome']['index'],
