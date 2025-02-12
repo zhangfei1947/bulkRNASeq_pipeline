@@ -35,7 +35,6 @@ rule qc_summary:
     shell:
         """
         # Generate tabular summary
-        export alias jq="/scratch/group/lilab/software/jq-linux-i386"
         ../scripts/jq.qc.sum.sh 02.QC_fastp/reports {output}
         """
 
@@ -48,7 +47,7 @@ rule duprate_plot:
         """
         module load GCC/12.2.0 OpenMPI/4.1.4 R/4.3.1
         export R_LIBS_USER="/scratch/group/lilab/software/R_library/4.3"
-        Rscript ../scripts/duprate.plot.R {input}
+        Rscript scripts/duprate.plot.R {input}
         """
 
 
