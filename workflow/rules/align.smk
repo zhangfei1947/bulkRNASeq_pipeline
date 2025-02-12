@@ -12,9 +12,7 @@ rule hisat2_align:
         "logs/align/{sample}.log"
     threads: 6
     resources:
-        runtime = 120,
-        nodes = 1,
-        ntasks = 1,
+        runtime = "02:00:00",
         cpus_per_task= 6,
         mem_mb = 10000
     params:
