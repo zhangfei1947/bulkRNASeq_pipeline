@@ -43,11 +43,8 @@ rule hisat2_summary:
         "03.Alignment_hisat2/mapping.summary"
     shell:
         """
-# Define output file name
-output_file="{output[0]}"
-
 # Initialize output file and add header
-echo "Sample Name\tTotal Reads\tExact Match Rate\tMultiple Match Rate" > $output_file
+echo "Sample Name\tTotal Reads\tExact Match Rate\tMultiple Match Rate" > {output}
 
 # Loop through all summary files
 for file in 03.Alignment_hisat2/*/*.summary; do
@@ -58,16 +55,14 @@ for file in 03.Alignment_hisat2/*/*.summary; do
     total_reads=$(grep -oP '^\d+ reads' "$file" | cut -d " " -f1)
     
     # Extract exact match rate
-    exact_match_rate=$(grep -oP '(?<=aligned concordantly exactly 1 time)\s+\d+(\.\d+)%' "$file")
+    exact_match_rate=$(grep 'aligned concordantly exactly 1 time' "$file" | grep -oP '\d+\.\d+')
     
     # Extract multiple match rate
-    multiple_match_rate=$(grep -oP '(?<=aligned concordantly >1 times)\s+\d+(\.\d+)%' "$file")
+    multiple_match_rate=$(grep 'aligned concordantly >1 times' "$file" | grep -oP '\d+\.\d+')
     
     # Append extracted data to output file
-    echo "$sample_name\t$total_reads\t$exact_match_rate\t$multiple_match_rate" >> $output_file
+    echo "$sample_name\t$total_reads\t$exact_match_rate\t$multiple_match_rate" >> {output}
 done
-
-echo "Summarized files have been combined into $output_file"
         """
 
 rule mapping_plot:
