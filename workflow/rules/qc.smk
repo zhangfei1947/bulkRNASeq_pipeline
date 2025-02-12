@@ -35,7 +35,7 @@ rule qc_summary:
     shell:
         """
         # Generate tabular summary
-        ../scripts/jq.qc.sum.sh 02.QC_fastp/reports {output}
+        scripts/jq.qc.sum.sh 02.QC_fastp/reports {output}
         """
 
 rule duprate_plot:
