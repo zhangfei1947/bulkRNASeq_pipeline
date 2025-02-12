@@ -36,8 +36,7 @@ rule qc_summary:
         """
         # Generate tabular summary
         alias jq="/scratch/group/lilab/software/jq-linux-i386"
-        echo {input}
-        ../scripts/jq.qc.sum.sh {output}
+        ../scripts/jq.qc.sum.sh 02.QC_fastp/reports {output}
         """
 
 rule duprate_plot:
