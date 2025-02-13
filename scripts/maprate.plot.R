@@ -1,10 +1,9 @@
-library(ggplot2)
 
 args <- commandArgs(trailingOnly = TRUE)
 map_table <- args[1]
 outplot <- args[2]
 
-png(outplot, width=800, height=600, res=120)
+png(outplot, width=500, height=600, res=120)
 
 data <- read.table(map_table, header=TRUE, sep="\t")
 

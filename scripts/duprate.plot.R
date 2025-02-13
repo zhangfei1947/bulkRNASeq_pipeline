@@ -1,25 +1,27 @@
-library(ggplot2)
-library(dplyr)
+
 args <- commandArgs(trailingOnly = TRUE)
 qc_table <- args[1]
 outplot <- args[2]
 
-data <- read.delim(qc_table, header = TRUE, sep = "\t")
+data <- read.table(qc_table, header=TRUE, sep="\t")
 
+data$duplication_rate <- data$duplication_rate * 100
 
-data <- data %>%
-  mutate(rank = rank(-duplication_rate)) %>%
-  filter(rank <= 3)
+png(outplot, width=500, height=600, res=120)
 
+boxplot(data$duplication_rate, 
+        main="Distribution of Duplication Rate",
+        ylab="Duplication Rate (%)",
+        ylim=c(min(data$duplication_rate)-1, max(data$duplication_rate)+2))
 
-ggplot(data, aes(x = "", y = duplication_rate, fill = Sample)) +
-  geom_boxplot(width = 0.5) +
-  geom_text(aes(label = Sample), vjust = -1, position = position_jitter(width = 0.2, height = 0)) +
-  theme_minimal() +
-  labs(title = "Boxplot of Duplication Rate",
-       x = "",
-       y = "Duplication Rate") +
-  theme(axis.text.x = element_blank(),
-        axis.ticks.x = element_blank())
+points(rep(1, nrow(data)), data$duplication_rate, pch=16)
 
-ggsave(outplot, width=6, height=6, dpi=300)
+highest_indices <- order(data$duplication_rate, decreasing=TRUE)[1:3]
+
+text(rep(1.2, 3), 
+     data$duplication_rate[highest_indices], 
+     data$Sample[highest_indices], 
+     pos=4, 
+     cex=0.8)
+
+dev.off()
