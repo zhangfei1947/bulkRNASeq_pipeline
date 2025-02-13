@@ -4,21 +4,23 @@ args <- commandArgs(trailingOnly = TRUE)
 map_table <- args[1]
 outplot <- args[2]
 
-data <- read.table(map_table, header=TRUE, sep = "\t")
-# Create boxplot
-p <- ggplot(data, aes(x="", y=Exact.Match.Rate)) +
-  geom_boxplot(fill = "skyblue") +
-  theme_minimal() +
-  labs(title = "Boxplot of Exact Match Rate",
-       x = "",
-       y = "Exact Match Rate (%)") +
-  theme(axis.text.x = element_blank(),
-        axis.title.x = element_blank(),
-        axis.text.x = element_text(angle = 45, hjust = 1))
-# Add text labels for the three lowest points
-outliers <- subset(data, Exact.Match.Rate %in% c(min(Exact.Match.Rate, na.rm = TRUE), 
-                                               min(Exact.Match.Rate, na.rm = TRUE),
-                                               min(Exact.Match.Rate, na.rm = TRUE)))
-p <- p + geom_text(aes(label=Sample.Name, y=Exact.Match.Rate), vjust=-0.5)  
-# Save the plot as PNG
-ggsave(outplot, plot=p, width=6, height=6, dpi=300)
+png(outplot, width=800, height=600, res=120)
+
+data <- read.table(map_table, header=TRUE, sep="\t")
+
+boxplot(data$Exact.Match.Rate, 
+        main="Distribution of Exact Match Rate",
+        ylab="Exact Match Rate (%)",
+        ylim=c(min(data$Exact.Match.Rate)-0.5, max(data$Exact.Match.Rate)+0.5))
+
+points(rep(1, nrow(data)), data$Exact.Match.Rate, pch=16)
+
+lowest_indices <- order(data$Exact.Match.Rate)[1:3]
+
+text(rep(1.2, 3), 
+     data$Exact.Match.Rate[lowest_indices], 
+     data$Sample.Name[lowest_indices], 
+     pos=4, 
+     cex=0.8)
+
+dev.off()

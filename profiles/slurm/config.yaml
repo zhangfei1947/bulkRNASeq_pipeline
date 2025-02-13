@@ -6,7 +6,7 @@ latency-wait: 60
 use-conda: false
 keep-going: true
 rerun-incomplete: true
-restart-times: 3
+restart-times: 2
 
 
 default-resources:
@@ -18,7 +18,7 @@ default-resources:
 
 
 printshellcmds: true
-verbose: true
+verbose: false
 
 
 use-singularity: false
