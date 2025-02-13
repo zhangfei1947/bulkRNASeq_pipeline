@@ -39,6 +39,7 @@ rule fc_summary:
         "04.Quant_featureCounts/fc.summary"
     shell:
         """
+
 echo "sample\tassignrate" > {output}
-sed ':a;N;$!ba;s/\n//g' {input}| sed -e 's/Process BAM file /\n/g'|sed 1d|sed -e 's/.bam.*(/\t/g' -e 's/%.*//g' >> {output}
+sed ':a;N;$!ba;s/\\n//g' {input}| sed -e 's/Process BAM file /\\n/g'|sed 1d|sed -e 's/.bam.*(/\\t/g' -e 's/%.*//g' >> {output}
         """

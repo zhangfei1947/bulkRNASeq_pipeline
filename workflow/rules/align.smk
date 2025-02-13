@@ -41,24 +41,13 @@ rule hisat2_summary:
         "03.Alignment_hisat2/mapping.summary"
     shell:
         """
-# Initialize output file and add header
 echo "Sample Name\tTotal Reads\tExact Match Rate\tMultiple Match Rate" > {output}
-
-# Loop through all summary files
-for file in 03.Alignment_hisat2/*/*.summary; do
-    # Extract sample name
-    sample_name=$(basename "$file" | sed 's/\.summary//')
-    
-    # Extract total reads
-    total_reads=$(grep -oP '^\d+ reads' "$file" | cut -d " " -f1)
-    
-    # Extract exact match rate
-    exact_match_rate=$(grep 'aligned concordantly exactly 1 time' "$file" | grep -oP '\d+\.\d+')
-    
-    # Extract multiple match rate
-    multiple_match_rate=$(grep 'aligned concordantly >1 times' "$file" | grep -oP '\d+\.\d+')
-    
-    # Append extracted data to output file
+for file in 03.Alignment_hisat2/*/*.summary; 
+do
+    sample_name=$(basename "$file" | sed 's/.summary//')   
+    total_reads=$(grep -oP '^\d+ reads' "$file" | cut -d " " -f1)  
+    exact_match_rate=$(grep "aligned concordantly exactly 1 time" "$file" | grep -oP "\d+\.\d+")
+    multiple_match_rate=$(grep "aligned concordantly >1 times" "$file" | grep -oP "\d+\.\d+")
     echo "$sample_name\t$total_reads\t$exact_match_rate\t$multiple_match_rate" >> {output}
 done
         """
