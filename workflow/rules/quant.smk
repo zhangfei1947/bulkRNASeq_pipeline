@@ -1,4 +1,4 @@
-localrules: fc_summary
+localrules: fc_summary, fc_plot
 
 rule featurecounts:
     input:
@@ -39,7 +39,18 @@ rule fc_summary:
         "04.Quant_featureCounts/fc.summary"
     shell:
         """
-
 echo "sample\tassignrate" > {output}
 sed ':a;N;$!ba;s/\\n//g' {input}| sed -e 's/Process BAM file /\\n/g'|sed 1d|sed -e 's/.bam.*(/\\t/g' -e 's/%.*//g' >> {output}
         """
+rule fc_plot:
+    input:
+        "04.Quant_featureCounts/counts_raw.tsv.summary"
+    output:
+        "04.Quant_featureCounts/assignment_stacked_barplot.png"
+    shell:
+        """
+module load GCC/12.2.0 OpenMPI/4.1.4 R/4.3.1
+export R_LIBS_USER="/scratch/group/lilab/software/R_library/4.3"
+Rscript {params.pipepath}/scripts/fc.assign.plot.R {input} {output}
+        """
+
