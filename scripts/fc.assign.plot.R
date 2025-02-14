@@ -18,11 +18,10 @@ png(outplot, width=png_width, height=600, res=120)
 colors <- c("#377EB8", "#4DAF4A", "#984EA3", "#FF7F00", "#E41A1C")
 
 # Create stacked barplot
-par(xpd=TRUE, mar=c(5,4,4,80))
 barplot(t(plot_data),
         col=colors[1:nrow(data)],
         legend.text=data$Status,
-        args.legend=list(x="right", cex=0.8, bg="white", box.lty=0),
+        args.legend=list(inset=c(-0.2,0), cex=0.8, bg="white", box.lty=0),
         main="Read Assignment Distribution",
         ylab="Number of Reads",
         las=2)  
