@@ -18,7 +18,7 @@ png(outplot, width=png_width, height=400, res=120)
 colors <- c("#377EB8", "#4DAF4A", "#984EA3", "#FF7F00", "#E41A1C")
 
 # Create stacked barplot
-par(xpd=TRUE, mar=c(5,4,4,8))
+#par(xpd=TRUE, mar=c(5,4,4,8))
 barplot(t(plot_data),
         col=colors[1:nrow(data)],
         legend.text=data$Status,
