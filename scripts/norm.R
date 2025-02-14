@@ -11,10 +11,11 @@ output_fpkm <- args[3]
 library(DESeq2)
 
 count_matrix <- read.table(rc_file, skip=1, header=TRUE, row.names=1)
-samples <- strsplit(sample, ",")[[1]]
+sample <- strsplit(sample, ",")[[1]]
 groups <- strsplit(group, ",")[[1]]
-sample_info <- cbind(samples, groups)
+sample_info <- cbind(sample, groups)
 
+print(sample_info)
 #create DESeq2 object
 dds <- DESeqDataSetFromMatrix(countData=count_matrix, colData=sample_info, design=~groups)
 

@@ -1,15 +1,14 @@
+#!/usr/bin/env Rscript
+
 library(DESeq2)
 library(EnhancedVolcano)
 
-#!/usr/bin/env Rscript
-
 args <- commandArgs(trailingOnly = TRUE)
-filtered_rc_file <- args[1]
+rc_file <- args[1]
 sample_info_file <- args[2]
 out_path <- args[3]
-setwd(out_path)
 
-count_matrix <- read.table(filtered_rc_file,header=TRUE,row.names=1)
+count_matrix <- read.table(rc_file,header=TRUE,row.names=1)
 sample_info <- read.table(sample_info_file,header=TRUE, row.names=1)
 
 #create DESeq2 object
