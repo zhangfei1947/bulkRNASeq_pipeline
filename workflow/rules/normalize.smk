@@ -7,8 +7,8 @@ rule normalize_counts:
         fpkm = "05.Normalization_DESeq2/fpkm_matrix.tsv"
     params:
         anno = config['genome']['annotation'],
-        sample = config['samples'].keys(),
-        group = set(sample['group'] for sample in config["samples"].values()),
+        sample = ",".join( config['samples'].keys() ),
+        group = ",".join( sample['group'] for sample in config["samples"].values() ),
         pipepath = config['pipepath']
     shell:
         """
