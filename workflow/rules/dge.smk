@@ -4,8 +4,13 @@ rule differential_expression:
     output:
         "06.DGE_DESeq2/{comparison}_results.tsv"
     params:
-        contrast = lambda wildcards: config['diff_comparisons'][wildcards.comparison]
+        contrast = lambda wildcards: config['diff_comparisons'][wildcards.comparison],
+        pipepath = config['pipepath']
     log:
         "logs/diff/{comparison}.log"
-    script:
-        "../scripts/diff.R"
+    shell:
+        """
+module load GCC/12.2.0 OpenMPI/4.1.4 R/4.3.1
+export R_LIBS_USER="/scratch/group/lilab/software/R_library/4.3"
+Rscript {params.pipepath}/scripts/diff.R {input} {params.contrast}
+        """
