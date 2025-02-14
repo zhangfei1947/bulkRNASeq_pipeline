@@ -9,6 +9,7 @@ rule normalize_counts:
         anno = config['genome']['annotation'],
         sample = config['samples'].keys(),
         group = set(sample['group'] for sample in config["samples"].values()),
+        pipepath = config['pipepath']
     shell:
         """
 echo {params.sample} >> {output.normalized}
@@ -16,5 +17,5 @@ echo {params.group} >> {output.normalized}
 
 #module load GCC/12.2.0 OpenMPI/4.1.4 R/4.3.1
 #export R_LIBS_USER="/scratch/group/lilab/software/R_library/4.3"
-#Rscript {params.pipepath}/scripts/norm.R {input} {output}
+#Rscript {params.pipepath}/scripts/norm.R {input} {output.normalized}
         """
