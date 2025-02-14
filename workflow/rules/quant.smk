@@ -31,6 +31,18 @@ rule featurecounts:
         -D 800 \
         {input} > {log} 2>&1
         """
+rule fc_filter:
+    input:
+        "04.Quant_featureCounts/counts_raw.tsv"
+    output:
+        "04.Quant_featureCounts/counts_filter.tsv"
+    shell:
+        """
+#keep if at least one sample got >10 reads
+awk 'BEGIN NR==2{print $0; next} NR>2{for(i=7;i<=NF;i++) if($i>10){print $0; next}}' {input} > {output}
+#keep if avg(reads) > 1
+#awk 'BEGIN NR==2{print $0; next} NR>2{sum=0; for(i=7;i<=NF;i++) sum+=$i; if(sum>(NF-6)) print $0}'
+        """
 
 rule fc_summary:
     input:
@@ -42,6 +54,7 @@ rule fc_summary:
 echo "sample\tassignrate" > {output}
 sed ':a;N;$!ba;s/\\n//g' {input}| sed -e 's/Process BAM file /\\n/g'|sed 1d|sed -e 's/.bam.*(/\\t/g' -e 's/%.*//g' >> {output}
         """
+
 rule fc_plot:
     input:
         "04.Quant_featureCounts/counts_raw.tsv.summary"

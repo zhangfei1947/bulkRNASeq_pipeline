@@ -34,6 +34,7 @@ rule all:
         "03.Alignment_hisat2/mapping.summary",
         "03.Alignment_hisat2/mappingrate.boxplot.png",
         "04.Quant_featureCounts/counts_raw.tsv",
+        "04.Quant_featureCounts/counts_filter.tsv",
         "04.Quant_featureCounts/fc.summary",
         "04.Quant_featureCounts/assignment_stacked_barplot.png",
         "05.Normalization_DESeq2/counts_normalized.tsv"
