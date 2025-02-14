@@ -47,6 +47,8 @@ rule fc_plot:
         "04.Quant_featureCounts/counts_raw.tsv.summary"
     output:
         "04.Quant_featureCounts/assignment_stacked_barplot.png"
+    params:
+        pipepath = config['pipepath']
     shell:
         """
 module load GCC/12.2.0 OpenMPI/4.1.4 R/4.3.1

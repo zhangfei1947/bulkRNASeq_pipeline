@@ -11,8 +11,8 @@ rule normalize_counts:
         group = lambda wildcards: config['samples'][wildcards.sample]['group']
     shell:
         """
-echo {params.sample} > sampleinfo
-echo {params.group} > sampleinfo
+echo {params.sample} >> sampleinfo
+echo {params.group} >> sampleinfo
 
 #module load GCC/12.2.0 OpenMPI/4.1.4 R/4.3.1
 #export R_LIBS_USER="/scratch/group/lilab/software/R_library/4.3"

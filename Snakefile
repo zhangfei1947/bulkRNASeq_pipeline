@@ -16,7 +16,7 @@ include: "workflow/rules/align.smk"
 include: "workflow/rules/quant.smk"
 
 # row readcount normalization, sample correlation, PCA
-#include: "workflow/rules/normalize.smk"
+include: "workflow/rules/normalize.smk"
 
 # differential gene expression
 #include: "workflow/rules/dge.smk"
