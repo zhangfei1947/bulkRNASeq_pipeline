@@ -6,8 +6,8 @@ rule normalize_counts:
         normalized = "05.Normalization_DESeq2/counts_normalized.tsv",
         fpkm = "05.Normalization_DESeq2/fpkm_matrix.tsv"
     params:
-        anno = config['genome']['annotation']
-        sample = lambda wildcards: config['samples'][wildcards.sample]
+        anno = config['genome']['annotation'],
+        sample = lambda wildcards: config['samples'][wildcards.sample],
         group = lambda wildcards: config['samples'][wildcards.sample]['group']
     shell:
         """
