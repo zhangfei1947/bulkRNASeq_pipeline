@@ -11,14 +11,14 @@ data <- data[rowSums(data[,-1]) > 0,]
 
 plot_data <- as.matrix(t(data[,-1]))
 
-png_width <- ncol(plot_data) * 120
+png_width <- ncol(plot_data) * 140
 
 png(outplot, width=png_width, height=600, res=120)
 
 colors <- c("#377EB8", "#4DAF4A", "#984EA3", "#FF7F00", "#E41A1C")
 
 # Create stacked barplot
-par(xpd=TRUE, mar=c(5,4,4,8))
+par(xpd=TRUE, mar=c(5,4,4,80))
 barplot(t(plot_data),
         col=colors[1:nrow(data)],
         legend.text=data$Status,

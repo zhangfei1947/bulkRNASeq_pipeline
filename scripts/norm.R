@@ -1,21 +1,22 @@
 #!/usr/bin/env Rscript
+args <- commandArgs(trailingOnly = TRUE)
 
-input_file <- snakemake@input
-anno_file <- snakemake@params$anno
-sample <- snakemake@params$sample
-group <- snakemake@params$group
-output_norm <- snakemake@output$normalized
-output_fpkm <- snakemake@output$fpkm
-
-.libPaths(c(snakemake@params$r_libs, .libPaths()))
+rc_file <- args[1]
+anno_file <- args[4]
+sample <- args[5]
+group <- args[6]
+output_norm <- args[2]
+output_fpkm <- args[3]
 
 library(DESeq2)
 
 count_matrix <- read.table(rc_file, skip=1, header=TRUE, row.names=1)
-sample_info <- read.table(sample_info_file, header=TRUE, row.names=1)
+samples <- strsplit(sample, ",")[[1]]
+groups <- strsplit(group, ",")[[1]]
+sample_info <- cbind(samples, groups)
 
 #create DESeq2 object
-dds <- DESeqDataSetFromMatrix(countData=count_matrix, colData=sample_info, design=~condition)
+dds <- DESeqDataSetFromMatrix(countData=count_matrix, colData=sample_info, design=~groups)
 
 #median of ratios method of normalization
 dds <- estimateSizeFactors(dds)
