@@ -15,21 +15,21 @@ rule featurecounts:
         mem_mb = 6000
     shell:
         """
-        module load GCC/12.3.0 Subread/2.0.8
+module load GCC/12.3.0 Subread/2.0.8
 
-        featureCounts \
-        -T {threads} \
-        -a {params.anno} \
-        -o {output} \
-        -F GTF -t exon -g gene_id \
-        -s 2 \
-        -p \
-        --countReadPairs \
-        -O -M --fraction \
-        -P -B \
-        -d 40 \
-        -D 800 \
-        {input} > {log} 2>&1
+featureCounts \
+-T {threads} \
+-a {params.anno} \
+-o {output} \
+-F GTF -t exon -g gene_id \
+-s 2 \
+-p \
+--countReadPairs \
+-O -M --fraction \
+-P -B \
+-d 40 \
+-D 800 \
+{input} > {log} 2>&1
         """
 rule fc_filter:
     input:
@@ -38,10 +38,21 @@ rule fc_filter:
         "04.Quant_featureCounts/counts_filter.tsv"
     shell:
         """
-#keep if at least one sample got >10 reads
-awk 'BEGIN NR==2{print $0; next} NR>2{for(i=7;i<=NF;i++) if($i>10){print $0; next}}' {input} > {output}
-#keep if avg(reads) > 1
-#awk 'BEGIN NR==2{print $0; next} NR>2{sum=0; for(i=7;i<=NF;i++) sum+=$i; if(sum>(NF-6)) print $0}'
+cut -f1,7- {input} | awk "
+BEGIN{FS="\t"}
+NR==1{next}
+NR==2{
+    printf "Geneid"
+    for(i=2;i<=NF;i++){
+        split($i,a,"/")
+        printf "\t%s", a[2]
+    }
+    printf "\n"
+    next
+}
+NR>2{
+    for(i=2;i<=NF;i++) if($i>10){print $0; next}
+}" > {output}
         """
 
 rule fc_summary:

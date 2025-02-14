@@ -17,11 +17,11 @@ rule fastp_qc:
         mem_mb = 4096
     shell:
         """
-        module load GCC/11.2.0 fastp/0.23.2
-        fastp --in1 {input.r1} --in2 {input.r2} \
-            --out1 {output.r1_clean} --out2 {output.r2_clean} \
-            -j {output.json} -h {output.html} \
-            --thread {threads} > {log} 2>&1
+module load GCC/11.2.0 fastp/0.23.2
+fastp --in1 {input.r1} --in2 {input.r2} \
+    --out1 {output.r1_clean} --out2 {output.r2_clean} \
+    -j {output.json} -h {output.html} \
+    --thread {threads} > {log} 2>&1
         """
 
 rule qc_summary:
