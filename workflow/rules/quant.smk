@@ -36,23 +36,11 @@ rule fc_filter:
         "04.Quant_featureCounts/counts_raw.tsv"
     output:
         "04.Quant_featureCounts/counts_filter.tsv"
+    params:
+        pipepath = config['pipepath']
     shell:
         """
-cut -f1,7- {input} | awk "
-BEGIN{FS="\t"}
-NR==1{next}
-NR==2{
-    printf "Geneid"
-    for(i=2;i<=NF;i++){
-        split($i,a,"/")
-        printf "\t%s", a[2]
-    }
-    printf "\n"
-    next
-}
-NR>2{
-    for(i=2;i<=NF;i++) if($i>10){print $0; next}
-}" > {output}
+./{params.pipepath}/scripts/raw.rc.filter.sh {input} {output}
         """
 
 rule fc_summary:

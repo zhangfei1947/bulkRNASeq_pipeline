@@ -16,8 +16,11 @@ samples:
     read2: /scratch/group/lilab/Lilab_Seq_Data/250107_novogene_RNAseq/d7_grp_h2/d7_grp_h2_2.fq.gz
     group: d7_grp_h
 
-align:
-  - Cx: xxx
+
+corr: ["d1_grp_h_vs_d7_grp_h", "d7_grp_h"]
+
+pca_color: 
+  day: ["day1:d1_grp_h,d1_grp_h", "day7:d7_grp_h,d7_grp_h"]
 
 
 diff_comparisons:
