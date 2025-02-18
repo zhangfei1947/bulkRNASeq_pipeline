@@ -21,7 +21,7 @@ module load GCC/12.3.0 Subread/2.0.8
 featureCounts \
 -T {threads} \
 -a {params.anno} \
--o {output} \
+-o {output[0]} \
 -F GTF -t exon -g gene_id \
 -s 2 \
 -p \
