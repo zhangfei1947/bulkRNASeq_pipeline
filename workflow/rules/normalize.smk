@@ -18,8 +18,8 @@ Rscript {params.pipepath}/scripts/norm.R {input} {output.normalized} {output.fpk
         """
 
 
-def get_samples_for_groups(wildcards):
-    target_groups = wildcards.groups.split("-")
+def get_samples_for_groups(corr_grp):
+    target_groups = corr_grp.split("-")
     sample_list = []
     for sample_name, sample_info in config["samples"].items():
         if sample_info["group"] in target_groups:
@@ -34,7 +34,7 @@ rule corr_heat:
         expand("05.Normalization_DESeq2/corr.heatmap.{groups}.png", groups=config['corr'])
     params:
         groups = config['corr'],
-        sps = get_samples_for_groups,
+        sps = get_samples_for_groups(config['corr']),
         pipepath = config['pipepath'],
         outpath = "05.Normalization_DESeq2"
     shell:
