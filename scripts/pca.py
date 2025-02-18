@@ -9,7 +9,7 @@ import sys
 def main():
     infile = snakemake.input
 
-    df = pd.read_csv(filepath, sep='\t', index_col=0)
+    df = pd.read_csv(infile, sep='\t', index_col=0)
     df_log2 = np.log2(df + 0.01)
 
     # Scaling the data
@@ -23,6 +23,9 @@ def main():
     # Creating a DataFrame for PCA results
     pca_df = pd.DataFrame(data=pca_result, columns=['PC1', 'PC2', 'PC3'])
     pca_df['Sample'] = df.columns
+
+    color_mapping = snakemake.params.color_mapping
+    sample_colors = snakemake.params.sample_colors
 
     # Extracting metadata for coloring
     pca_df['Tissue'] = pca_df['Sample'].str.split("_").str[2].str[0]
@@ -68,9 +71,6 @@ def main():
     plt.savefig(outpath+"/pca_plots.png")
     plt.show()
 
-# Run PCA
 if __name__ == "__main__":
-    filepath = sys.argv[1]
-    outpath = sys.argv[2]
-    perform_pca_analysis(filepath, outpath)
+    main()
 
