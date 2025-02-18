@@ -5,7 +5,7 @@ import numpy as np
 import sys, re
 
 def main():
-    filepath = snakemake.input
+    filepath = snakemake.input.norm_counts
     print(filepath)
     outfile = snakemake.output
     target_groups = snakemake.params.target_groups
