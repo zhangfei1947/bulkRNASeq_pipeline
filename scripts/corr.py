@@ -20,7 +20,7 @@ def main():
     correlation_matrix = correlation_matrix.fillna(0)
 
     n_sample = len(valid_samples)
-    plt.figure(figsize=(0.4*n_sample+1, 0.4*n_sample))
+    plt.figure(figsize=(0.4*n_sample+4, 0.4*n_sample+2))
     sns.heatmap(correlation_matrix, cmap="coolwarm", vmin=0.8, vmax=1)
     #plt.title(f"Correlation Heatmap")
     plt.tight_layout()
