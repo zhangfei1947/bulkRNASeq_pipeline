@@ -23,7 +23,7 @@ dds <- DESeqDataSetFromMatrix(countData=count_matrix, colData=sample_info, desig
 #median of ratios method of normalization
 dds <- estimateSizeFactors(dds)
 normalized_counts <- counts(dds, normalized=TRUE)
-write.table(normalized_counts, file=paste0(out_path,"/counts_normalized.tsv"), sep="\t", quote=F, col.names=T, row.names=T)
+write.table(normalized_counts, file=paste0(output_norm), sep="\t", quote=F, col.names=T, row.names=T)
 
 #cal FPKM
 library(edgeR)
@@ -32,4 +32,4 @@ gene_info = read.csv(anno_file, header=T, row.names=1)
 gene_info = gene_info[row.names(normalized_counts),]
 
 genefpkm <- rpkm(normalized_counts, gene.length=gene_info$Gene_length, log=FALSE)
-write.table(genefpkm, file = paste0(out_path,"/fpkm_matrix.tsv"), sep="\t", quote=F, row.names=T)
+write.table(genefpkm, file = paste0(output_fpkm), sep="\t", quote=F, row.names=T)
