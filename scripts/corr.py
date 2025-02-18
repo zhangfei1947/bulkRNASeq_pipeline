@@ -24,7 +24,7 @@ def main():
     sns.heatmap(correlation_matrix, cmap="coolwarm", vmin=0.8, vmax=1)
     #plt.title(f"Correlation Heatmap")
     plt.tight_layout()
-    plt.savefig(outfile)
+    plt.savefig(outfile[0])
     plt.show()
 
 if __name__ == "__main__":
