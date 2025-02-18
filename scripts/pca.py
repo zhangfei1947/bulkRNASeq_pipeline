@@ -7,7 +7,7 @@ from sklearn.decomposition import PCA
 import sys
 
 def main():
-    infile = snakemake.input
+    infile = snakemake.input.norm_counts
 
     df = pd.read_csv(infile, sep='\t', index_col=0)
     df_log2 = np.log2(df + 0.01)
@@ -25,8 +25,11 @@ def main():
     pca_df['Sample'] = df.columns
 
     color_mapping = snakemake.params.color_mapping
+    print(color_mapping)
     sample_colors = snakemake.params.sample_colors
+    print(sample_colors)
 
+    exit()
     # Extracting metadata for coloring
     pca_df['Tissue'] = pca_df['Sample'].str.split("_").str[2].str[0]
     pca_df['Day'] = pca_df['Sample'].str.split("_").str[0]
@@ -35,12 +38,6 @@ def main():
     # Plotting
     n = 5
     fig, axes = plt.subplots(1, n, figsize=(n*(4.2), 4))
-
-    sns.scatterplot(x='PC1', y='PC2', hue='Tissue', data=pca_df, ax=axes[0], s=100)
-    axes[0].set_title('PCA Colored by Tissue')
-
-    sns.scatterplot(x='PC1', y='PC2', hue='Day', data=pca_df, ax=axes[1], s=100)
-    axes[1].set_title('PCA Colored by Day')
 
     sns.scatterplot(x='PC1', y='PC2', hue='Treatment', data=pca_df, ax=axes[2], s=100)
     axes[2].set_title('PCA Colored by Treatment')
@@ -67,8 +64,7 @@ def main():
 '''
 
     plt.tight_layout()
-    plt.savefig(outpath+"/pca_plots.pdf")
-    plt.savefig(outpath+"/pca_plots.png")
+    plt.savefig(snakemake.output[0])
     plt.show()
 
 if __name__ == "__main__":
