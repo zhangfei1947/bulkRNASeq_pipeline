@@ -28,7 +28,7 @@ rule corr_heat:
         target_groups = lambda wildcards: config["corr"][wildcards.corr_name].split(","),
         sample_mapping = lambda wildcards: (print(f"Current corr_name: {wildcards.corr_name}"), {s: info["group"] for s, info in config["samples"].items()})[-1]
     script:
-        "../scripts/corr.py"
+        "../../scripts/corr.py"
 
 
 rule pca:
@@ -51,4 +51,4 @@ rule pca:
             for sample, info in config["samples"].items()
         }
     script:
-        "../scripts/pca.py"
+        "../../scripts/pca.py"
