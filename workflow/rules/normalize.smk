@@ -1,8 +1,8 @@
-localrules: corr_heat
+localrules: corr_heat, pca
 
 rule normalize_counts:
     input:
-        "04.Quant_featureCounts/counts_raw.tsv"
+        "04.Quant_featureCounts/counts_filter.tsv"
     output:
         normalized = "05.Normalization_DESeq2/counts_normalized.tsv",
         fpkm = "05.Normalization_DESeq2/fpkm_matrix.tsv"
@@ -33,20 +33,28 @@ rule corr_heat:
 {params.pipepath}/scripts/corr.py
         """
 
-#rule pca:
-#    input:
-#        "05.Normalization_DESeq2/counts_normalized.tsv"
-#    output:
-#        "05.Normalization_DESeq2/pca.plots.pdf",
-#        "05.Normalization_DESeq2/pca.plots.png"
-#    params:
-#        color_name = config['pca_color'].keys(),
-#        color_grp = [grp.keys() for grp in config['pca_color'].values()],
-#        color_sp = [grp.values() for grp in config['pca_color'].values()],
-#        pipepath = config['pipepath'],
-#        outpath = "05.Normalization_DESeq2"
-#    script:
-#        """
-#{params.pipepath}/scripts/pca.py
-#        """
-#
+rule pca:
+    input:
+        "05.Normalization_DESeq2/counts_normalized.tsv"
+    output:
+        "05.Normalization_DESeq2/pca.plot.{color_scheme}.png"
+    params:
+        color_mapping = lambda wildcards: {
+            color_group: groups.split(",")
+            for color_group, groups in config["pca_color"][wildcards.color_scheme].items()
+        },
+
+        sample_colors = lambda wildcards: {
+            sample: next(
+                (cg for cg, gs in config["pca_color"][wildcards.color_scheme].items() 
+                 if info["group"] in gs.split(",")),
+                "unknown" 
+            )
+            for sample, info in config["samples"].items()
+        },
+
+        pipepath = config['pipepath']
+    script:
+        """
+{params.pipepath}/scripts/pca.py
+        """

@@ -21,7 +21,7 @@ colors <- c("#377EB8", "#4DAF4A", "#984EA3", "#FF7F00", "#E41A1C")
 barplot(t(plot_data),
         col=colors[1:nrow(data)],
         legend.text=data$Status,
-        args.legend=list(inset=c(-10,0), cex=0.8, bg="white", box.lty=0),
+        args.legend=list(x="rightbottom", cex=0.8, bg="white", box.lty=0),
         main="Read Assignment Distribution",
         ylab="Number of Reads",
         las=2)  

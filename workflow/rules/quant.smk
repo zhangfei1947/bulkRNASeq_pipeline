@@ -31,6 +31,7 @@ featureCounts \
 -D 800 \
 {input} > {log} 2>&1
         """
+
 rule fc_filter:
     input:
         "04.Quant_featureCounts/counts_raw.tsv"
@@ -40,7 +41,7 @@ rule fc_filter:
         pipepath = config['pipepath']
     shell:
         """
-./{params.pipepath}/scripts/raw.rc.filter.sh {input} {output}
+{params.pipepath}/scripts/raw.rc.filter.sh {input} {output}
         """
 
 rule fc_summary:

@@ -14,6 +14,7 @@ rule all:
         "04.Quant_featureCounts/assignment_stacked_barplot.png",
         "05.Normalization_DESeq2/counts_normalized.tsv",
         expand("05.Normalization_DESeq2/corr.heatmap.{corr_name}.png", corr_name=config["corr"].keys()),
+        expand("05.Normalization_DESeq2/pca.plot.{color_scheme}.png", color_scheme=config["pca_color"].keys())
 #        expand("05.Normalized/counts_normalized.tsv", **config),
 #        expand("06.DEA/{comparison}_DE_results.tsv", comparison=config['diff_comparisons']),
 #        expand("07.Visualization/venn_diagram.pdf", **config),
