@@ -6,6 +6,7 @@ import sys, re
 
 def main():
     filepath = snakemake.input
+    print(filepath)
     outfile = snakemake.output
     target_groups = snakemake.params.target_groups
     sample_mapping = snakemake.params.sample_mapping
