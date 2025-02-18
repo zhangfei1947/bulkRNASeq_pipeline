@@ -33,9 +33,9 @@ rule corr_heat:
         "05.Normalization_DESeq2/corr.heatmap.All_vs_All.png",
         expand("05.Normalization_DESeq2/corr.heatmap.{groups}.png", groups=config['corr'])
     params:
-        groups = config['corr']
-        sps = get_samples_for_groups
-        pipepath = config['pipepath']
+        groups = config['corr'],
+        sps = get_samples_for_groups,
+        pipepath = config['pipepath'],
         outpath = "05.Normalization_DESeq2"
     shell:
         """
@@ -50,10 +50,10 @@ rule pca:
         "05.Normalization_DESeq2/pca.plots.pdf",
         "05.Normalization_DESeq2/pca.plots.png"
     params:
-        color_name = config['pca_color'].keys()
-        color_grp = [grp.keys() for grp in config['pca_color'].values()]
-        color_sp = [grp.values() for grp in config['pca_color'].values()]
-        pipepath = config['pipepath']
+        color_name = config['pca_color'].keys(),
+        color_grp = [grp.keys() for grp in config['pca_color'].values()],
+        color_sp = [grp.values() for grp in config['pca_color'].values()],
+        pipepath = config['pipepath'],
         outpath = "05.Normalization_DESeq2"
     shell:
         """
