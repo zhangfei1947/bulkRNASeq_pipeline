@@ -14,6 +14,7 @@ sample <- strsplit(sample, ",")[[1]]
 group <- strsplit(group, ",")[[1]]
 sample_info <- cbind(sample, group)
 count_matrix <- read.table(rc_file, sep="\t", header=TRUE, row.names=1)
+count_matrix <- round(count_matrix)
 
 #create DESeq2 object
 dds <- DESeqDataSetFromMatrix(countData=count_matrix, colData=sample_info, design=~group)
