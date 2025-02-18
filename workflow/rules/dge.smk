@@ -1,17 +1,25 @@
-rule differential_expression:
+
+
+rule diff_analysis:
     input:
-        "04.Quant_featureCounts/counts_raw.tsv"
+        counts = "04.Quant_featureCounts/counts_filter.tsv"
     output:
-        expand("06.DGE_DESeq2/{comparison}_results.tsv", comparison=config['diff_comparisons'])
+        results = "06.Diff_Expression/{comparison}/{comparison}.deseq2_results.tsv",
+        sigresults = "06.Diff_Expression/{comparison}/{comparison}.deseq2_results.logFC1.padj0.05.tsv",
+        vcpdf = "06.Diff_Expression/{comparison}/{comparison}.volcano.pdf",
+        vcpng = "06.Diff_Expression/{comparison}/{comparison}.volcano.png"
     params:
-        contrast = lambda wildcards: config['diff_comparisons'][wildcards.comparison],
+        sample_info = lambda wildcards: {
+            sample: info["group"]
+            for sample, info in config["samples"].items()
+            if info["group"] in [
+                config["diff_comparisons"][wildcards.comparison]["numerator"],
+                config["diff_comparisons"][wildcards.comparison]["denominator"]
+            ]
+        },
+        comparison = lambda wildcards: config["diff_comparisons"][wildcards.comparison],
         pipepath = config['pipepath']
     log:
-        "logs/diff/{comparison}.log"
-    shell:
-        """
-echo {params.contrast}
-#module load GCC/12.2.0 OpenMPI/4.1.4 R/4.3.1
-#export R_LIBS_USER="/scratch/group/lilab/software/R_library/4.3"
-#Rscript {params.pipepath}/scripts/diff.R {input} {params.contrast}
-        """
+        "logs/diffexp/{comparison}.log"
+    script:
+        "../../scripts/diff.R"

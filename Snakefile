@@ -14,9 +14,13 @@ rule all:
         "04.Quant_featureCounts/assignment_stacked_barplot.png",
         "05.Normalization_DESeq2/counts_normalized.tsv",
         expand("05.Normalization_DESeq2/corr.heatmap.{corr_name}.png", corr_name=config["corr"].keys()),
-        expand("05.Normalization_DESeq2/pca.plot.{color_scheme}.png", color_scheme=config["pca_color"].keys())
-#        expand("05.Normalized/counts_normalized.tsv", **config),
-#        expand("06.DEA/{comparison}_DE_results.tsv", comparison=config['diff_comparisons']),
+        expand("05.Normalization_DESeq2/pca.plot.{color_scheme}.png", color_scheme=config["pca_color"].keys()),
+        expand(
+            "06.Diff_Expression/{comparison}/"
+            "{comparison}.{{ext}}".format(comparison=c), 
+            c=config["diff_comparisons"].keys(),
+            ext=["deseq2_results.tsv", "volcano.pdf", "MA_plot.pdf"]
+        )
 #        expand("07.Visualization/venn_diagram.pdf", **config),
 #        expand("08.Enrichment/GO_results.tsv", **config),
 #        expand("08.Enrichment/KEGG_results.tsv", **config)
@@ -40,7 +44,7 @@ include: "workflow/rules/quant.smk"
 include: "workflow/rules/normalize.smk"
 
 # differential gene expression
-#include: "workflow/rules/dge.smk"
+include: "workflow/rules/dge.smk"
 
 # plot venn diagram
 #include: "workflow/rules/venn.smk"
