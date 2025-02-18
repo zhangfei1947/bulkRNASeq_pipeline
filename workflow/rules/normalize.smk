@@ -25,7 +25,7 @@ rule corr_heat:
     output:
         "05.Normalization_DESeq2/corr.heatmap.{corr_name}.png"
     params:
-        target_groups = lambda wildcards: config["corr"][wildcards.corr_name].values().split(","),
+        target_groups = lambda wildcards: config["corr"][wildcards.corr_name].split(","),
         sample_mapping = lambda: {s: info["group"] for s, info in config["samples"].items()},
         pipepath = config['pipepath']
     script:

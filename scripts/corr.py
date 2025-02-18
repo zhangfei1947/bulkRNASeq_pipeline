@@ -4,11 +4,17 @@ import seaborn as sns
 import numpy as np
 import sys, re
 
-def plot_correlation_heatmap(file_path, outfile, samples):
-    df = pd.read_csv(file_path, sep='\t', index_col=0)
+def main():
+    filepath = snakemake.input
+    outfile = snakemake.output
+    target_groups = snakemake.params.target_groups
+    sample_mapping = snakemake.params.sample_mapping
+    valid_samples = [s for s in counts_df.columns if sample_mapping.get(s.split(".")[0]) in target_groups]
+
+    df = pd.read_csv(filepath, sep='\t', index_col=0)
     df_log2 = np.log2(df + 0.01)
 
-    group_df = df_log2[samples]
+    group_df = df_log2[valid_samples]
     correlation_matrix = group_df.corr(method='pearson')
     correlation_matrix = correlation_matrix.fillna(0)
 
@@ -25,12 +31,4 @@ def plot_correlation_heatmap(file_path, outfile, samples):
     plt.show()
 
 if __name__ == "__main__":
-    filepath = snakemake.input
-    outfile = snakemake.output
-    samples = snakemake.params.sample_mapping
-    try:
-        plot_correlation_heatmap(filepath, outfile, samples)
-    except (FileNotFoundError, ValueError) as e:
-        print(f"Error: {e}")
-    except Exception as e: # Catch any other potential exceptions
-        print(f"An unexpected error occurred: {e}")
+    main()
