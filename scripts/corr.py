@@ -19,7 +19,7 @@ def main():
     correlation_matrix = group_df.corr(method='pearson')
     correlation_matrix = correlation_matrix.fillna(0)
 
-    n_sample = len(samples)
+    n_sample = len(valid_samples)
     plt.figure(figsize=(0.4*n_sample+1, 0.4*n_sample))
     sns.heatmap(correlation_matrix, cmap="coolwarm", vmin=0.8, vmax=1)
     #plt.title(f"Correlation Heatmap")
