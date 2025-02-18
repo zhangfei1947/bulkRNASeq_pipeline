@@ -4,7 +4,8 @@ rule featurecounts:
     input:
         expand("03.Alignment_hisat2/{sample}/{sample}.bam", sample=config['samples'])
     output:
-        "04.Quant_featureCounts/counts_raw.tsv"
+        "04.Quant_featureCounts/counts_raw.tsv",
+        "04.Quant_featureCounts/counts_raw.tsv.summary"
     log:
         "logs/quant/featurecounts.log"
     params:
