@@ -18,10 +18,6 @@ def main():
     correlation_matrix = group_df.corr(method='pearson')
     correlation_matrix = correlation_matrix.fillna(0)
 
-    if correlation_matrix.empty: #check if the correlation_matrix is empty
-        print(f"No correlation can be calculated for group: {group_name}. May be only one sample in this group.")
-        continue
-
     n_sample = len(samples)
     plt.figure(figsize=(0.4*n_sample+1, 0.4*n_sample))
     sns.heatmap(correlation_matrix, cmap="coolwarm", vmin=0.8, vmax=1)
