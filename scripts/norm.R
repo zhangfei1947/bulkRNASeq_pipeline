@@ -11,6 +11,7 @@ output_fpkm <- args[3]
 library(DESeq2)
 
 count_matrix <- read.table(rc_file, header=TRUE, row.names=1)
+count_matrix <- round(count_matrix)
 sample <- strsplit(sample, ",")[[1]]
 groups <- strsplit(group, ",")[[1]]
 sample_info <- cbind(sample, groups)

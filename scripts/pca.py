@@ -6,7 +6,9 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 import sys
 
-def perform_pca_analysis(filepath,outpath):
+def main():
+    infile = snakemake.input
+
     df = pd.read_csv(filepath, sep='\t', index_col=0)
     df_log2 = np.log2(df + 0.01)
 
@@ -51,6 +53,7 @@ def perform_pca_analysis(filepath,outpath):
         ax.set_ylabel(f'PC2 ({pca.explained_variance_ratio_[1]*100:.2f}%)') #add explained variance ratio
         ax.set_aspect('auto', adjustable='box') # Make subplots square
 
+'''
     axes[3].set_xlabel(f'PC2 ({pca.explained_variance_ratio_[1]*100:.2f}%)') #add explained variance ratio
     axes[3].set_ylabel(f'PC3 ({pca.explained_variance_ratio_[2]*100:.2f}%)') #add explained variance ratio
     axes[3].set_aspect('auto', adjustable='box') # Make subplots square
@@ -58,6 +61,7 @@ def perform_pca_analysis(filepath,outpath):
     axes[4].set_xlabel(f'PC1 ({pca.explained_variance_ratio_[0]*100:.2f}%)') #add explained variance ratio
     axes[4].set_ylabel(f'PC3 ({pca.explained_variance_ratio_[2]*100:.2f}%)') #add explained variance ratio
     axes[4].set_aspect('auto', adjustable='box') # Make subplots square
+'''
 
     plt.tight_layout()
     plt.savefig(outpath+"/pca_plots.pdf")
