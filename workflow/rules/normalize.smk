@@ -1,3 +1,4 @@
+localrules: corr_heat
 
 rule normalize_counts:
     input:
@@ -18,45 +19,34 @@ Rscript {params.pipepath}/scripts/norm.R {input} {output.normalized} {output.fpk
         """
 
 
-def get_samples_for_groups(wildcards):
-    target_groups = wildcards.groups.split("-")
-    return [
-        f"feature_counts/{sample}.txt" 
-        for sample, info in config["samples"].items()
-        if info["group"] in target_groups
-    ]
-
 rule corr_heat:
     input:
-        "05.Normalization_DESeq2/counts_normalized.tsv"
+        norm_counts = "05.Normalization_DESeq2/counts_normalized.tsv"
     output:
-        "05.Normalization_DESeq2/corr.heatmap.All_vs_All.png",
-        expand("05.Normalization_DESeq2/corr.heatmap.{groups}.png", groups=config['corr'])
+        "05.Normalization_DESeq2/corr.heatmap.{corr_name}.png"
     params:
-        group_names = lambda wildcards: wildcards.groups.split("-")
-        sps = get_samples_for_groups,
-        pipepath = config['pipepath'],
+        target_groups = lambda wildcards: config["corr"][wildcards.corr_name].split(","),
+        sample_mapping = lambda: {s: info["group"] for s, info in config["samples"].items()},
+        pipepath = config['pipepath']
     script:
         """
 {params.pipepath}/scripts/corr.py
         """
 
-rule pca:
-    input:
-        "05.Normalization_DESeq2/counts_normalized.tsv"
-    output:
-        "05.Normalization_DESeq2/pca.plots.pdf",
-        "05.Normalization_DESeq2/pca.plots.png"
-    params:
-        color_name = config['pca_color'].keys(),
-        color_grp = [grp.keys() for grp in config['pca_color'].values()],
-        color_sp = [grp.values() for grp in config['pca_color'].values()],
-        pipepath = config['pipepath'],
-        outpath = "05.Normalization_DESeq2"
-    shell:
-        """
-echo {params.color_grp}
-echo {params.color_sp}
-#module load Anaconda3/2024.02-1
-#python {params.pipepath}/scripts/pca.py {input} 
-        """
+#rule pca:
+#    input:
+#        "05.Normalization_DESeq2/counts_normalized.tsv"
+#    output:
+#        "05.Normalization_DESeq2/pca.plots.pdf",
+#        "05.Normalization_DESeq2/pca.plots.png"
+#    params:
+#        color_name = config['pca_color'].keys(),
+#        color_grp = [grp.keys() for grp in config['pca_color'].values()],
+#        color_sp = [grp.values() for grp in config['pca_color'].values()],
+#        pipepath = config['pipepath'],
+#        outpath = "05.Normalization_DESeq2"
+#    script:
+#        """
+#{params.pipepath}/scripts/pca.py
+#        """
+#
