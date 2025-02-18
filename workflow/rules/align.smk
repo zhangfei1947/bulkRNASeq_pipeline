@@ -17,8 +17,7 @@ rule hisat2_align:
         mem_mb = 10000
     params:
         index = config['genome']['index'],
-        splicesites = config['genome']['splicesites'],
-        extra = config['align']
+        splicesites = config['genome']['splicesites']
     shell:
         """
         module load GCC/13.2.0  OpenMPI/4.1.6 HISAT2/2.2.1 SAMtools/1.21
