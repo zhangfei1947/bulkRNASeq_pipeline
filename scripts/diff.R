@@ -3,6 +3,7 @@
 library(DESeq2)
 library(EnhancedVolcano)
 
+args <- commandArgs(trailingOnly = TRUE)
 rc_file <- args[1]
 sample <- args[2]
 group <- args[3]
