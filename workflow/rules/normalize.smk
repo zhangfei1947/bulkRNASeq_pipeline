@@ -18,13 +18,13 @@ Rscript {params.pipepath}/scripts/norm.R {input} {output.normalized} {output.fpk
         """
 
 
-def get_samples_for_groups(corr_grp):
-    target_groups = corr_grp.split("-")
-    sample_list = []
-    for sample_name, sample_info in config["samples"].items():
-        if sample_info["group"] in target_groups:
-            sample_list.append(sample_name)
-    return ",".join(sample_list)
+def get_samples_for_groups(wildcards):
+    target_groups = wildcards.groups.split("-")
+    return [
+        f"feature_counts/{sample}.txt" 
+        for sample, info in config["samples"].items()
+        if info["group"] in target_groups
+    ]
 
 rule corr_heat:
     input:
@@ -33,14 +33,12 @@ rule corr_heat:
         "05.Normalization_DESeq2/corr.heatmap.All_vs_All.png",
         expand("05.Normalization_DESeq2/corr.heatmap.{groups}.png", groups=config['corr'])
     params:
-        groups = config['corr'],
-        sps = get_samples_for_groups(config['corr']),
+        group_names = lambda wildcards: wildcards.groups.split("-")
+        sps = get_samples_for_groups,
         pipepath = config['pipepath'],
-        outpath = "05.Normalization_DESeq2"
-    shell:
+    script:
         """
-module load Anaconda3/2024.02-1
-python {params.pipepath}/scripts/corr.py {input} {";".join(params.groups)} {";".join(params.sps)} {params.outpath}
+{params.pipepath}/scripts/corr.py
         """
 
 rule pca:

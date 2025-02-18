@@ -17,7 +17,9 @@ samples:
     group: d7_grp_h
 
 
-corr: ["d1_grp_h-d7_grp_h", "d7_grp_h"]
+corr: 
+  all: d1_grp_h,d7_grp_h
+  d7_grp_h: d7_grp_h
 
 pca_color: 
   day:
