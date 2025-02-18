@@ -4,22 +4,16 @@ rule diff_analysis:
     input:
         counts = "04.Quant_featureCounts/counts_filter.tsv"
     output:
-        results = "06.Diff_Expression/{comparison}/{comparison}.deseq2_results.tsv",
-        sigresults = "06.Diff_Expression/{comparison}/{comparison}.deseq2_results.logFC1.padj0.05.tsv",
-        vcpdf = "06.Diff_Expression/{comparison}/{comparison}.volcano.pdf",
-        vcpng = "06.Diff_Expression/{comparison}/{comparison}.volcano.png"
+        results = expand("06.Diff_Expression/{comparison}.deseq2_results.tsv", comparison=config['diff_comparisons'])
     params:
-        sample_info = lambda wildcards: {
-            sample: info["group"]
-            for sample, info in config["samples"].items()
-            if info["group"] in [
-                config["diff_comparisons"][wildcards.comparison]["numerator"],
-                config["diff_comparisons"][wildcards.comparison]["denominator"]
-            ]
-        },
-        comparison = lambda wildcards: config["diff_comparisons"][wildcards.comparison],
+        comparison = ",".join(config["diff_comparisons"]),
+        sample = ",".join( config['samples'].keys() ),
+        group = ",".join( sample['group'] for sample in config["samples"].values() ),
+        outpath = "06.Diff_Expression/",
         pipepath = config['pipepath']
-    log:
-        "logs/diffexp/{comparison}.log"
-    script:
-        "../../scripts/diff.R"
+    shell:
+        """
+module load GCC/12.2.0 OpenMPI/4.1.4 R/4.3.1
+export R_LIBS_USER="/scratch/group/lilab/software/R_library/4.3"
+Rscript {params.pipepath}/scripts/diff.R {input.counts} {params.sample} {params.group} {params.comparison} {params.outpath} 
+        """

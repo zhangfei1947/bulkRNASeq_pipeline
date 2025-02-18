@@ -26,14 +26,11 @@ pca_color:
     day1: d1_grp_h
     day7: d7_grp_h
 
-diff_comparisons:
-  grp_d7_h_vs_grp_d1_h:
-    numerator: d7_grp_h
-    denominator: d1_grp_h
+diff_comparisons: ["grp_d7_h_vs_grp_d1_h"]
 
 venn_genes:
-  - DE_genes: ["Control_vs_Treatment"]
-  - Top_expressed: ["TPM > 100"]
+  DE_genes: ["Control_vs_Treatment"]
+  Top_expressed: ["TPM > 100"]
 
 enrichment:
   GO:
