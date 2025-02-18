@@ -1,4 +1,4 @@
-localrules: corr_heat
+localrules: corr_heat, pca
 
 rule normalize_counts:
     input:
