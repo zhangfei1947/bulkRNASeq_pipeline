@@ -1,4 +1,4 @@
-localrules: make_links
+localrules: make_links, create_logs_dir
 
 rule make_links:
     input:
@@ -13,3 +13,6 @@ rule make_links:
         ln -sf {input.r2} {output.r2}
         """
 
+rule create_logs_dir:
+    output:
+        directory("logs")
