@@ -8,9 +8,9 @@ rule make_links:
         r1 = "01.Rawdata/{sample}/{sample}_R1.fq.gz",
         r2 = "01.Rawdata/{sample}/{sample}_R2.fq.gz"
     log:
-        "logs/preprocess.log"
+        "logs/prep/{sample}.log"
     shell:
         """
-        ln -sf {input.r1} {output.r1} 2>> {log}
-        ln -sf {input.r2} {output.r2} 2>> {log}
+        ln -sf {input.r1} {output.r1} 2> {log}
+        ln -sf {input.r2} {output.r2} 2> {log}
         """

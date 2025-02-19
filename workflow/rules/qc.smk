@@ -18,6 +18,7 @@ rule fastp_qc:
     shell:
         """
 module load GCC/11.2.0 fastp/0.23.2
+mkdir -p logs/qc
 fastp --in1 {input.r1} --in2 {input.r2} \
     --out1 {output.r1_clean} --out2 {output.r2_clean} \
     -j {output.json} -h {output.html} \
