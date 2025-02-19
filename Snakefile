@@ -1,5 +1,3 @@
-envmodules: True
-
 #configfile: "config.yaml"
 
 rule all:
