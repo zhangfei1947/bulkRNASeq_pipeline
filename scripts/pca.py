@@ -36,18 +36,21 @@ def main():
 
     sns.scatterplot(x='PC1', y='PC2', hue='color_scheme', data=pca_df, ax=axes[0], s=100)
     #axes[0].set_title('PCA Colored by Treatment')
+    axes[0].legend_.set_title(None)
     axes[0].set_xlabel(f'PC1 ({pca.explained_variance_ratio_[0]*100:.2f}%)') #add explained variance ratio
     axes[0].set_ylabel(f'PC2 ({pca.explained_variance_ratio_[1]*100:.2f}%)') #add explained variance ratio
     axes[0].set_aspect('auto', adjustable='box') # Make subplots square
 
     sns.scatterplot(x='PC2', y='PC3', hue='color_scheme', data=pca_df, ax=axes[1], s=100)
     #axes[1].set_title('PCA Colored by Treatment')
+    axes[1].legend_.set_title(None)
     axes[1].set_xlabel(f'PC2 ({pca.explained_variance_ratio_[1]*100:.2f}%)') #add explained variance ratio
     axes[1].set_ylabel(f'PC3 ({pca.explained_variance_ratio_[2]*100:.2f}%)') #add explained variance ratio
     axes[1].set_aspect('auto', adjustable='box') # Make subplots square
 
     sns.scatterplot(x='PC1', y='PC3', hue='color_scheme', data=pca_df, ax=axes[2], s=100)
     #axes[2].set_title('PCA Colored by Treatment')
+    axes[2].legend_.set_title(None)
     axes[2].set_xlabel(f'PC1 ({pca.explained_variance_ratio_[1]*100:.2f}%)') #add explained variance ratio
     axes[2].set_ylabel(f'PC3 ({pca.explained_variance_ratio_[2]*100:.2f}%)') #add explained variance ratio
     axes[2].set_aspect('auto', adjustable='box') # Make subplots square
