@@ -22,7 +22,7 @@ colors <- c("#377EB8", "#4DAF4A", "#984EA3", "#FF7F00", "#E41A1C")
 barplot(t(plot_data),
         col=colors[1:nrow(data)],
         legend.text=data$Status,
-        args.legend=list(x="center", cex=0.7, bg="white", box.lty=0),
+        args.legend=list(x="bottom",inset=c(0,0.1), cex=0.7, bg="white", box.lty=0),
         ylab="Number of Reads",
         las=2)  
 
