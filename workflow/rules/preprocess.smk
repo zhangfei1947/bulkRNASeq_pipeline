@@ -1,4 +1,5 @@
 localrules: make_links
+
 rule make_links:
     input:
         r1 = lambda wildcards: config['samples'][wildcards.sample]['read1'],
@@ -10,6 +11,6 @@ rule make_links:
         "logs/preprocess.log"
     shell:
         """
-        ln -sf {input.r1} {output.r1}
+        ln -sf {input.r1} {output.r1} 2>> {log}
         ln -sf {input.r2} {output.r2} 2>> {log}
         """
