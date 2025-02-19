@@ -11,6 +11,6 @@ rule make_links:
         "logs/prep/{sample}.log"
     shell:
         """
-        ln -sf {input.r1} {output.r1} 2> {log}
-        ln -sf {input.r2} {output.r2} 2> {log}
+        ln -sf {input.r1} {output.r1} > {log} 2>&1
+        ln -sf {input.r2} {output.r2} > {log} 2>&1
         """
