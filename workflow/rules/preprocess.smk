@@ -1,5 +1,4 @@
-localrules: make_links, create_logs_dir
-
+localrules: make_links
 rule make_links:
     input:
         r1 = lambda wildcards: config['samples'][wildcards.sample]['read1'],
@@ -7,12 +6,10 @@ rule make_links:
     output:
         r1 = "01.Rawdata/{sample}/{sample}_R1.fq.gz",
         r2 = "01.Rawdata/{sample}/{sample}_R2.fq.gz"
+    log:
+        "logs/preprocess.log"
     shell:
         """
         ln -sf {input.r1} {output.r1}
-        ln -sf {input.r2} {output.r2}
+        ln -sf {input.r2} {output.r2} 2>> {log}
         """
-
-rule create_logs_dir:
-    output:
-        directory("logs")
