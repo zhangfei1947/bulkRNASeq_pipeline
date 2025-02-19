@@ -28,17 +28,6 @@ pca_color:
 
 diff_comparisons: ["d7_grp_h_vs_d1_grp_h"]
 
-venn_genes:
-  DE_genes: ["Control_vs_Treatment"]
-  Top_expressed: ["TPM > 100"]
-
-enrichment:
-  GO:
-    databases: ["BP", "MF", "CC"]
-    fdr_cutoff: 0.05
-  KEGG:
-    org_db: "Dm"
-    fdr_cutoff: 0.1
 
 genome:
   index: /scratch/group/lilab/Genome_Reference/dmel_r6.55/dmel_r6.55

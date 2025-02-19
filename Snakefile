@@ -1,4 +1,4 @@
-#envmodules: True
+envmodules: True
 
 #configfile: "config.yaml"
 
@@ -16,11 +16,8 @@ rule all:
         expand("05.Normalization_DESeq2/corr.heatmap.{corr_name}.png", corr_name=config["corr"].keys()),
         expand("05.Normalization_DESeq2/pca.plot.{color_scheme}.png", color_scheme=config["pca_color"].keys()),
         expand("06.Diff_Expression/{comp}.deseq2_results.tsv", comp=config["diff_comparisons"]),
-#        expand("07.Visualization/venn_diagram.pdf", **config),
-#        expand("08.Enrichment/GO_results.tsv", **config),
-#        expand("08.Enrichment/KEGG_results.tsv", **config)
-
-
+        expand("07.Venn/{group}.venn.png", group=config["venn"].keys()),
+        expand("08.Enrichment/{comparison}.go_enrichment.tsv", comparison=config["GO"])
 
 # Include modules
 # softlink rawdata 
@@ -42,8 +39,7 @@ include: "workflow/rules/normalize.smk"
 include: "workflow/rules/dge.smk"
 
 # plot venn diagram
-#include: "workflow/rules/venn.smk"
+include: "workflow/rules/venn.smk"
 
-# functional analysis
-#include: "workflow/rules/func.smk"
-
+# go enrichment analysis
+include: "workflow/rules/go.smk"
