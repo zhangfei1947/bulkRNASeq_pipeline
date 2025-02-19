@@ -11,7 +11,7 @@ data <- data[rowSums(data[,-1]) > 0,]
 
 plot_data <- as.matrix(t(data[,-1]))
 
-png_width <- ncol(plot_data) * 140 + 100
+png_width <- ncol(plot_data) * 50 + 500
 
 png(outplot, width=png_width, height=600, res=120)
 
@@ -22,7 +22,7 @@ colors <- c("#377EB8", "#4DAF4A", "#984EA3", "#FF7F00", "#E41A1C")
 barplot(t(plot_data),
         col=colors[1:nrow(data)],
         legend.text=data$Status,
-        args.legend=list(x="right",inset=c(-0.1,0), cex=0.8, bg="white", box.lty=0, xpd=TRUE),
+        args.legend=list(x="center", cex=0.7, bg="white", box.lty=0),
         ylab="Number of Reads",
         las=2)  
 
