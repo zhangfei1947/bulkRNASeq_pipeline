@@ -10,10 +10,10 @@ rule featurecounts:
         "logs/quant/featurecounts.log"
     params:
         anno = config['genome']['annotation']
-    threads: 4
+    threads: int(len(config['samples'])/3)
     resources:
-        cpus_per_task= 4,
-        mem_mb = 6000
+        cpus_per_task= int(len(config['samples'])/3),
+        mem_mb = 400*len(config['samples'])
     shell:
         """
 module load GCC/12.3.0 Subread/2.0.8
