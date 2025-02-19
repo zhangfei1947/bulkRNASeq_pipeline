@@ -22,7 +22,7 @@ par(xpd=TRUE)
 barplot(t(plot_data),
         col=colors[1:nrow(data)],
         legend.text=data$Status,
-        args.legend=list(x="right",inset=c(-0.2,0), cex=0.8, bg="white", box.lty=0),
+        args.legend=list(x="right",inset=c(-1,0), cex=0.8, bg="white", box.lty=0),
         main="Read Assignment Distribution",
         ylab="Number of Reads",
         las=2)  
