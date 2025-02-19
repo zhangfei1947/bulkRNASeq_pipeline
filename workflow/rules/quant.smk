@@ -10,17 +10,16 @@ rule featurecounts:
         "logs/quant/featurecounts.log"
     params:
         anno = config['genome']['annotation']
-    threads: int(len(config['samples'])/3)
     resources:
         runtime = 360,
-        cpus_per_task = int(len(config['samples'])/3),
+        cpus_per_task = int(len(config['samples'])/2),
         mem_mb = 400*len(config['samples'])
     shell:
         """
 module load GCC/12.3.0 Subread/2.0.8
 
 featureCounts \
--T {threads} \
+-T {resources.cpus_per_task} \
 -a {params.anno} \
 -o {output[0]} \
 -F GTF -t exon -g gene_id \

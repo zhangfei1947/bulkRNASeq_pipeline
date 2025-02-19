@@ -112,6 +112,13 @@ pca_color:
 
 diff_comparisons: ["d7_grp_h_vs_d1_grp_h", "d7_iso_h_vs_d1_iso_h", "d7_iso_h_vs_d7_grp_h", "d1_iso_h_vs_d1_grp_h", "d7_grp_b_vs_d1_grp_b", "d7_iso_b_vs_d1_iso_b", "d7_iso_b_vs_d7_grp_b", "d1_iso_b_vs_d1_grp_b"]
 
+venn:
+  day7_head: d7_grp_h_vs_d1_grp_h,d7_iso_h_vs_d1_iso_h
+  day7_body: d7_grp_b_vs_d1_grp_b,d7_iso_b_vs_d1_iso_b
+  iso_head: d7_iso_h_vs_d1_iso_h,d1_iso_h_vs_d1_grp_h
+
+GO: ["d7_iso_h_vs_d7_grp_h", "d7_iso_b_vs_d7_grp_b"]
+
 genome:
   index: /scratch/group/lilab/Genome_Reference/dmel_r6.55/dmel_r6.55
   annotation: /scratch/group/lilab/Genome_Reference/dmel_r6.55/dmel-all-r6.55.gtf
