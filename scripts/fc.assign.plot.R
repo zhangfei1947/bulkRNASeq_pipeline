@@ -11,20 +11,21 @@ data <- data[rowSums(data[,-1]) > 0,]
 
 plot_data <- as.matrix(t(data[,-1]))
 
-png_width <- ncol(plot_data) * 160 + 300
+png_width <- ncol(plot_data) * 140 + 100
 
 png(outplot, width=png_width, height=600, res=120)
 
 colors <- c("#377EB8", "#4DAF4A", "#984EA3", "#FF7F00", "#E41A1C")
 
 # Create stacked barplot
-par(xpd=TRUE)
+
 barplot(t(plot_data),
         col=colors[1:nrow(data)],
         legend.text=data$Status,
-        args.legend=list(x="right",inset=c(-1,0), cex=0.8, bg="white", box.lty=0),
-        main="Read Assignment Distribution",
+        args.legend=list(x="bottom",inset=c(0,1), cex=0.8, bg="white", box.lty=0, xpd=TRUE, horiz=TRUE),
         ylab="Number of Reads",
         las=2)  
 
 dev.off()
+
+#main="Read Assignment Distribution",
