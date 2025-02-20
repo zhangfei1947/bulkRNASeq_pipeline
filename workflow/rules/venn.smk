@@ -11,11 +11,10 @@ rule generate_venn:
             comp.strip() 
             for comp in config["venn"][wildcards.group].split(",")
         ],
-        r_libs = "/scratch/group/lilab/software/R_library/4.3"
-    envmodules:
-        "OpenMPI/4.1.4",
-        "GCC/12.2.0",
-        "R/4.3.1"
-    script:
-        "../../scripts/venn.R"
-
+        pipepath = config['pipepath']
+    shell:
+        """
+module load GCC/12.2.0 OpenMPI/4.1.4 R/4.3.1
+export R_LIBS_USER="/scratch/group/lilab/software/R_library/4.3"
+Rscript {params.pipepath}/scripts/venn.R {input} {params.labels} {output}
+        """
