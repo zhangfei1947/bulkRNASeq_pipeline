@@ -4,16 +4,16 @@ rule featurecounts:
     input:
         "03.Alignment_hisat2/{sample}/{sample}.bam"
     output:
-        rc = "04.Quant_featureCounts/{sample}.counts_raw.tsv",
-        summ = "04.Quant_featureCounts/{sample}.counts_raw.tsv.summary"
+        rc = "04.Quant_featureCounts/{sample}/{sample}.counts_raw.tsv",
+        summ = "04.Quant_featureCounts/{sample}/{sample}.counts_raw.tsv.summary"
     log:
         "logs/quant/{sample}.featurecounts.log"
     params:
         anno = config['genome']['annotation']
     resources:
         runtime = 60,
-        cpus_per_task = 2,
-        mem_mb = 3000
+        cpus_per_task = 4,
+        mem_mb = 4096
     shell:
         """
 module load GCC/12.3.0 Subread/2.0.8
@@ -35,7 +35,7 @@ featureCounts \
 
 rule fc_merge:
     input:
-        expand("04.Quant_featureCounts/{sample}.counts_raw.tsv", sample=config['samples']),
+        expand("04.Quant_featureCounts/{sample}/{sample}.counts_raw.tsv", sample=config['samples']),
     output:
         "04.Quant_featureCounts/counts_raw.tsv",
         "04.Quant_featureCounts/counts_filter.tsv"
@@ -62,7 +62,7 @@ sed ':a;N;$!ba;s/\\n//g' {input}| sed -e 's/Process BAM file /\\n/g'|sed 1d|sed 
 
 rule fc_plot:
     input:
-        expand("04.Quant_featureCounts/{sample}.counts_raw.tsv.summary", sample=config['samples'])
+        expand("04.Quant_featureCounts/{sample}/{sample}.counts_raw.tsv.summary", sample=config['samples'])
     output:
         "04.Quant_featureCounts/assignment_stacked_barplot.png"
     params:
