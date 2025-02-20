@@ -50,18 +50,19 @@ echo {output}
 
 rule fc_summary:
     input:
-        "logs/quant/{sample}.featurecounts.log"
+        expand("logs/quant/{sample}.featurecounts.log", sample=config['samples'])
     output:
         "04.Quant_featureCounts/fc.summary"
     shell:
         """
-#echo "sample\tassignrate" > {output}
+echo {input}
+echo "sample\tassignrate" > {output}
 sed ':a;N;$!ba;s/\\n//g' {input}| sed -e 's/Process BAM file /\\n/g'|sed 1d|sed -e 's/.bam.*(/\\t/g' -e 's/%.*//g' >> {output}
         """
 
 rule fc_plot:
     input:
-        expand("04.Quant_featureCounts/counts_raw.tsv.summary")
+        expand("04.Quant_featureCounts/{sample}.counts_raw.tsv.summary", sample=config['samples'])
     output:
         "04.Quant_featureCounts/assignment_stacked_barplot.png"
     params:
