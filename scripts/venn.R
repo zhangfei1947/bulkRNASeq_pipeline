@@ -1,8 +1,15 @@
 library(VennDiagram)
 
-input_files <- snakemake@input[[1]]    
-labels <- snakemake@params$labels     
-output_file <- snakemake@output[[1]]   
+#input_files <- snakemake@input[[1]]    
+#labels <- snakemake@params$labels     
+#output_file <- snakemake@output[[1]]   
+
+args <- commandArgs(trailingOnly=TRUE)
+input_files <- args[1]
+print(input_files)
+label <- args[2]
+output_file <- args[3]
+
 
 read_diff_genes <- function(file) {
   df <- read.delim(file, sep = "\t")
