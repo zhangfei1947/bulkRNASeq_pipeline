@@ -1,19 +1,19 @@
-localrules: fc_summary, fc_plot
+localrules: fc_merge, fc_summary, fc_plot
 
 rule featurecounts:
     input:
-        expand("03.Alignment_hisat2/{sample}/{sample}.bam", sample=config['samples'])
+        "03.Alignment_hisat2/{sample}/{sample}.bam"
     output:
-        "04.Quant_featureCounts/counts_raw.tsv",
-        "04.Quant_featureCounts/counts_raw.tsv.summary"
+        rc = "04.Quant_featureCounts/{sample}.counts_raw.tsv",
+        summ = "04.Quant_featureCounts/{sample}.counts_raw.tsv.summary"
     log:
-        "logs/quant/featurecounts.log"
+        "logs/quant/{sample}.featurecounts.log"
     params:
         anno = config['genome']['annotation']
     resources:
-        runtime = 360,
-        cpus_per_task = int(len(config['samples'])/2),
-        mem_mb = 400*len(config['samples'])
+        runtime = 60,
+        cpus_per_task = 2,
+        mem_mb = 3000
     shell:
         """
 module load GCC/12.3.0 Subread/2.0.8
@@ -21,7 +21,7 @@ module load GCC/12.3.0 Subread/2.0.8
 featureCounts \
 -T {resources.cpus_per_task} \
 -a {params.anno} \
--o {output[0]} \
+-o {output.summ} \
 -F GTF -t exon -g gene_id \
 -s 2 \
 -p \
@@ -33,32 +33,35 @@ featureCounts \
 {input} > {log} 2>&1
         """
 
-rule fc_filter:
+rule fc_merge:
     input:
-        "04.Quant_featureCounts/counts_raw.tsv"
+        expand("04.Quant_featureCounts/{sample}.counts_raw.tsv", sample=config['samples']),
     output:
+        "04.Quant_featureCounts/counts_raw.tsv",
         "04.Quant_featureCounts/counts_filter.tsv"
     params:
         pipepath = config['pipepath']
     shell:
         """
+echo {input}
+echo {output}
 {params.pipepath}/scripts/raw.rc.filter.sh {input} {output}
         """
 
 rule fc_summary:
     input:
-        "logs/quant/featurecounts.log"
+        "logs/quant/{sample}.featurecounts.log"
     output:
         "04.Quant_featureCounts/fc.summary"
     shell:
         """
-echo "sample\tassignrate" > {output}
+#echo "sample\tassignrate" > {output}
 sed ':a;N;$!ba;s/\\n//g' {input}| sed -e 's/Process BAM file /\\n/g'|sed 1d|sed -e 's/.bam.*(/\\t/g' -e 's/%.*//g' >> {output}
         """
 
 rule fc_plot:
     input:
-        "04.Quant_featureCounts/counts_raw.tsv.summary"
+        expand("04.Quant_featureCounts/counts_raw.tsv.summary")
     output:
         "04.Quant_featureCounts/assignment_stacked_barplot.png"
     params:
