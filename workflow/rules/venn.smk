@@ -13,9 +13,9 @@ rule generate_venn:
         ],
         r_libs = "/scratch/group/lilab/software/R_library/4.3"
     envmodules:
-        "R/4.3.1",
         "OpenMPI/4.1.4",
-        "GCC/12.2.0"
+        "GCC/12.2.0",
+        "R/4.3.1"
     script:
         "../../scripts/venn.R"
 

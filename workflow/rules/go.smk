@@ -4,8 +4,8 @@ rule go_enrichment:
     output:
         "08.Enrichment/{comparison}.go_enrichment.tsv"
     envmodules:
-        "R/4.3.1",
+        "GCC/12.2.0",
         "OpenMPI/4.1.4",
-        "GCC/12.2.0"
+        "R/4.3.1"
     script:
         "../../scripts/go_enrich.R"
