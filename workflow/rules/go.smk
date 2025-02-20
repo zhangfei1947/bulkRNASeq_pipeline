@@ -2,7 +2,9 @@ rule go_enrichment:
     input:
         diff = "06.Diff_Expression/{comparison}.FC2.padj0.05.deseq2_results.tsv"
     output:
-        outfile = "08.Enrichment/{comparison}.go_enrichment.tsv"
+        outfile = "08.Enrichment/{comparison}.go_enrichment.tsv",
+        pdf = "08.Enrichment/{comparison}.go_enrichment.pdf",
+        png = "08.Enrichment/{comparison}.go_enrichment.png"
     params:
         pipepath = config['pipepath']
     log:
@@ -11,5 +13,5 @@ rule go_enrichment:
         """
 module load GCC/12.2.0 OpenMPI/4.1.4 R/4.3.1
 export R_LIBS_USER="/scratch/group/lilab/software/R_library/4.3"
-Rscript {params.pipepath}/scripts/go_enrich.R {input.diff} {output.outfile}
+Rscript {params.pipepath}/scripts/go_enrich.R {input.diff} {output.outfile} {output.pdf}  {output.png} 
         """

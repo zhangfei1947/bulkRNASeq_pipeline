@@ -16,5 +16,5 @@ rule generate_venn:
         """
 module load GCC/12.2.0 OpenMPI/4.1.4 R/4.3.1
 export R_LIBS_USER="/scratch/group/lilab/software/R_library/4.3"
-Rscript {params.pipepath}/scripts/venn.R {input} {params.labels} {output}
+Rscript {params.pipepath}/scripts/venn.R {",".join(input)} {",".join(params.labels)} {output}
         """

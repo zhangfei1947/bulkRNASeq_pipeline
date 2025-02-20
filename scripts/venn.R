@@ -5,9 +5,8 @@ library(VennDiagram)
 #output_file <- snakemake@output[[1]]   
 
 args <- commandArgs(trailingOnly=TRUE)
-input_files <- args[1]
-print(input_files)
-label <- args[2]
+input_files <- strsplit(args[1], ",")[[1]]
+labels <- strsplit(args[2], ",")[[1]]
 output_file <- args[3]
 
 

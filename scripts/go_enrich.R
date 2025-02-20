@@ -10,6 +10,8 @@ library(ggplot2)
 args <- commandArgs(trailingOnly=TRUE)
 input_file <- args[1]
 output_file <- args[2]
+output_pdf <- args[3]
+output_png <- args[4]
 
 gene_list <- row.names(read.table(input_file, header=TRUE, sep="\t"))
 
