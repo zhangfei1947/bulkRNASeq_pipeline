@@ -4,6 +4,8 @@ rule go_enrichment:
     output:
         outfile = "08.Enrichment/{comparison}.go_enrichment.tsv",
         pipepath = config['pipepath']
+    log:
+        "logs/go/{comparison}.log"
     shell:
         """
 module load GCC/12.2.0 OpenMPI/4.1.4 R/4.3.1
