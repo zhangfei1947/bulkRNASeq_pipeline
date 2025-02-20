@@ -2,7 +2,8 @@ rule go_enrichment:
     input:
         diff = "06.Diff_Expression/{comparison}.FC2.padj0.05.deseq2_results.tsv"
     output:
-        outfile = "08.Enrichment/{comparison}.go_enrichment.tsv",
+        outfile = "08.Enrichment/{comparison}.go_enrichment.tsv"
+    params:
         pipepath = config['pipepath']
     log:
         "logs/go/{comparison}.log"
