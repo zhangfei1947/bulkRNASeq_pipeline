@@ -17,5 +17,6 @@ pipeline_dir=/scratch/group/lilab/Phil/bulkRNASeq_pipeline
 snakemake --snakefile ${pipeline_dir}/Snakefile \
     --configfile config.yaml \
     --profile ${pipeline_dir}/profiles/slurm \
-    --use-envmodules 
+
+#    --use-envmodules 
 
