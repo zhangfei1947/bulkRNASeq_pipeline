@@ -21,8 +21,10 @@ def main():
 
     n_sample = len(valid_samples)
     plt.figure(figsize=(0.4*n_sample+4, 0.4*n_sample+2))
-    sns.heatmap(correlation_matrix, cmap="coolwarm", vmin=0.8, vmax=1)
-    plt.set_aspect('equal')
+    sns.heatmap(correlation_matrix, square=True, 
+        cmap="coolwarm", vmin=0.8, vmax=1,
+        cbar_kws={"shrink": 0.3}
+        )
     #plt.title(f"Correlation Heatmap")
     plt.tight_layout()
     plt.savefig(outfile[0])
