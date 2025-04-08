@@ -13,8 +13,4 @@ rule diff_analysis:
         outpath = "06.Diff_Expression/",
         pipepath = config['pipepath']
     shell:
-        """
-module load GCC/12.2.0 OpenMPI/4.1.4 R/4.3.1
-export R_LIBS_USER="/scratch/group/lilab/software/R_library/4.3"
-Rscript {params.pipepath}/scripts/diff.R {input.counts} {params.sample} {params.group} {params.comparison} {params.outpath} 
-        """
+        "scripts/diff.R {input.counts} {params.sample} {params.group} {params.comparison} {params.outpath}"

@@ -21,9 +21,9 @@ printshellcmds: true
 verbose: false
 
 
-use-singularity: false
+use-singularity: true
 #singularity-prefix: ".snakemake/singularity"
-#singularity-args: "--bind /data"
+singularity-args: "--bind /data"
 
 
 shadow-prefix: ".snakemake/shadow"

@@ -16,8 +16,6 @@ rule featurecounts:
         mem_mb = 400*len(config['samples'])
     shell:
         """
-module load GCC/12.3.0 Subread/2.0.8
-
 featureCounts \
 -T {resources.cpus_per_task} \
 -a {params.anno} \
@@ -40,16 +38,16 @@ rule fc_filter:
         "04.Quant_featureCounts/counts_filter.tsv"
     params:
         pipepath = config['pipepath']
-    shell:
-        """
-{params.pipepath}/scripts/raw.rc.filter.sh {input} {output}
-        """
+    container: None
+    script:
+        "scripts/raw.rc.filter.sh {input} {output}"
 
 rule fc_summary:
     input:
         "logs/quant/featurecounts.log"
     output:
         "04.Quant_featureCounts/fc.summary"
+    container: None
     shell:
         """
 echo "sample\tassignrate" > {output}
@@ -63,10 +61,6 @@ rule fc_plot:
         "04.Quant_featureCounts/assignment_stacked_barplot.png"
     params:
         pipepath = config['pipepath']
-    shell:
-        """
-module load GCC/12.2.0 OpenMPI/4.1.4 R/4.3.1
-export R_LIBS_USER="/scratch/group/lilab/software/R_library/4.3"
-Rscript {params.pipepath}/scripts/fc.assign.plot.R {input} {output}
-        """
+    script:
+        "scripts/fc.assign.plot.R {input} {output}"
 

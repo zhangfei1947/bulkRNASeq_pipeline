@@ -9,9 +9,6 @@ rule go_enrichment:
         pipepath = config['pipepath']
     log:
         "logs/go/{comparison}.log"
-    shell:
-        """
-module load GCC/12.2.0 OpenMPI/4.1.4 R/4.3.1
-export R_LIBS_USER="/scratch/group/lilab/software/R_library/4.3"
-Rscript {params.pipepath}/scripts/go_enrich.R {input.diff} {output.outfile} {output.pdf}  {output.png} 
-        """
+    script:
+        "scripts/go_enrich.R {input.diff} {output.outfile} {output.pdf}  {output.png}"
+

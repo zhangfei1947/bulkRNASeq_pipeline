@@ -28,6 +28,7 @@ rule qc_summary:
         expand("02.QC_fastp/reports/{sample}.json", sample=config['samples'])
     output:
         "02.QC_fastp/QC_summary_table.tsv"
+    container: None
     shell:
         """
 echo -e "Sample\tReads_brfore\tReads_after\tQ20_R1_before\tQ20_R2_before\tQ20_R1_after\tQ20_R2_after\tduplication_rate\tinsert_size" > {output}
@@ -50,8 +51,7 @@ rule duprate_plot:
         "02.QC_fastp/QC_summary_table.tsv"
     output:
         "02.QC_fastp/duprate.boxplot.png"
-    params:
-        pipepath = config['pipepath']
+    container: None
     script:
-        "../scripts/duprate.plot.R {input} {output}"
+        "scripts/duprate.plot.R {input} {output}"
 

@@ -11,12 +11,9 @@ rule normalize_counts:
         sample = ",".join( config['samples'].keys() ),
         group = ",".join( sample['group'] for sample in config["samples"].values() ),
         pipepath = config['pipepath']
-    shell:
-        """
-module load GCC/12.2.0 OpenMPI/4.1.4 R/4.3.1
-export R_LIBS_USER="/scratch/group/lilab/software/R_library/4.3"
-Rscript {params.pipepath}/scripts/norm.R {input} {output.normalized} {output.fpkm} {params.anno} {params.sample} {params.group}
-        """
+    script:
+        "scripts/norm.R {input} {output.normalized} {output.fpkm} {params.anno} {params.sample} {params.group}"
+
 
 
 rule corr_heat:
@@ -28,7 +25,7 @@ rule corr_heat:
         target_groups = lambda wildcards: config["corr"][wildcards.corr_name].split(","),
         sample_mapping = lambda wildcards: {s: info["group"] for s, info in config["samples"].items()}
     script:
-        "../../scripts/corr.py"
+        "scripts/corr.py"
 
 
 rule pca:
@@ -51,4 +48,4 @@ rule pca:
             for sample, info in config["samples"].items()
         }
     script:
-        "../../scripts/pca.py"
+        "scripts/pca.py"
