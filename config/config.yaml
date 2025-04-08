@@ -124,13 +124,3 @@ venn:
 #comparisons
 GO: ["d7_iso_h_vs_d7_grp_h", "d7_iso_b_vs_d7_grp_b"]
 
-
-genome:
-  index: /scratch/group/lilab/Genome_Reference/dmel_r6.55/dmel_r6.55
-  annotation: /scratch/group/lilab/Genome_Reference/dmel_r6.55/dmel-all-r6.55.gtf
-  splicesites: /scratch/group/lilab/Genome_Reference/dmel_r6.55/dmel-all-r6.55.hisat2.splice_sites
-  geneloc: /scratch/group/lilab/Genome_Reference/dmel_r6.55/gene_annotation.csv
-  geneanno: /scratch/group/lilab/Genome_Reference/dmel_r6.55/gene_annotations.tsv
-
-pipepath: /scratch/group/lilab/Phil/bulkRNASeq_pipeline
-
