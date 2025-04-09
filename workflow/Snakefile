@@ -1,7 +1,7 @@
 configfile: "/scratch/group/lilab/Phil/bulkRNASeq_pipeline/config/config.fix.yaml"
 
 ## singularity container
- container: "/scratch/group/lilab/Phil/RNASeq_container.sif"
+container: "/scratch/group/lilab/Phil/RNASeq_container.sif"
 
 rule all:
     input:
