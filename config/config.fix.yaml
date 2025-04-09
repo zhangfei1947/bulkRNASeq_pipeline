@@ -11,7 +11,7 @@ pipepath: /scratch/group/lilab/Phil/bulkRNASeq_pipeline
 use-singularity: true
 #singularity-prefix: ".snakemake/singularity"
 singularity-args: "--bind /data"
-
+jobs: 50
 
 default-resources:
   runtime: 60
