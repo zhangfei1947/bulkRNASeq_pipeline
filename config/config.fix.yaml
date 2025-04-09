@@ -12,6 +12,8 @@ use-singularity: true
 #singularity-prefix: ".snakemake/singularity"
 singularity-args: "--bind /data"
 jobs: 50
+nodes: 1
+
 
 default-resources:
   runtime: 60
