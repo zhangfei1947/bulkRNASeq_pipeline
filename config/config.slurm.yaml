@@ -1,4 +1,3 @@
-# profiles/slurm/config.yaml
 
 cluster: "sbatch -t {resources.runtime} --mem {resources.mem_mb} --nodes {resources.nodes} --ntasks {resources.ntasks} --cpus-per-task {resources.cpus_per_task} -J {rule} -o logs/{rule}.%j.out -e logs/{rule}.%j.err"
 jobs: 50
