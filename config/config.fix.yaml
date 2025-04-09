@@ -7,6 +7,7 @@ genome:
 
 pipepath: /scratch/group/lilab/Phil/bulkRNASeq_pipeline
 
+jobs: 50
 
 use-singularity: true
 #singularity-prefix: ".snakemake/singularity"

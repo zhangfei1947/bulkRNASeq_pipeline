@@ -1,4 +1,7 @@
-configfile: "../config/config.fix.yaml"
+configfile: "/scratch/group/lilab/Phil/bulkRNASeq_pipeline/config/config.fix.yaml"
+
+import os
+print(os.getcwd())
 
 print(config)
 ## singularity container
