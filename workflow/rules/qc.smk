@@ -11,13 +11,10 @@ rule fastp_qc:
         json = "02.QC_fastp/reports/{sample}.json",
     log:
         "logs/qc/{sample}.log"
-    threads: 1
+    threads: 2
     resources:
-        runtime="60m",
-        mem_mb=4096,
-#        nodes=1,
-#        ntasks=1,
-#        cpus_per_task = 2
+        cpus_per_task = 2,
+        mem_mb = 4096
     shell:
         """
 fastp --in1 {input.r1} --in2 {input.r2} \

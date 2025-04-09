@@ -7,15 +7,23 @@ genome:
 
 pipepath: /scratch/group/lilab/Phil/bulkRNASeq_pipeline
 
-jobs: 50
 
 use-singularity: true
 #singularity-prefix: ".snakemake/singularity"
 singularity-args: "--bind /data"
 
 
+cluster: "sbatch -t {resources.runtime} --mem {resources.mem_mb} --nodes {resources.nodes} --ntasks {resources.ntasks} --cpus-per-task {resources.cpus_per_task} -J {rule} -o logs/{rule}.%j.out -e logs/{rule}.%j.err"
+jobs: 50
+latency-wait: 60
+use-conda: false
+keep-going: true
+rerun-incomplete: true
+restart-times: 1
+
+
 default-resources:
-  runtime: "60m"
+  runtime: 60
   mem_mb: 4096
   nodes: 1
   ntasks: 1
