@@ -16,11 +16,6 @@ rule generate_venn:
             comp.strip()
             for comp in config["venn"][wildcards.group].split(",")
             if comp.strip()
-        ]),
-        pipepath = config['pipepath']
-    shell:
-        """
-module load GCC/12.2.0 OpenMPI/4.1.4 R/4.3.1
-export R_LIBS_USER="/scratch/group/lilab/software/R_library/4.3"
-Rscript {params.pipepath}/scripts/venn.R {params.input_files} {params.labels_str} {output}
-        """
+        ])
+    script:
+        "../scripts/venn.R"
