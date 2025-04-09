@@ -1,4 +1,4 @@
-configfile: "../config/config.fix.yaml"
+configfile: "/scratch/group/lilab/Phil/bulkRNASeq_pipeline/config/config.fix.yaml"
 
 print(config)
 ## singularity container
