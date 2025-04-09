@@ -18,12 +18,12 @@ default-resources:
 
 
 printshellcmds: true
-verbose: true
+verbose: false
 
 
-use-singularity: true
+use-singularity: false
 #singularity-prefix: ".snakemake/singularity"
-singularity-args: "--bind /data"
+#singularity-args: "--bind /data"
 
 
 shadow-prefix: ".snakemake/shadow"
