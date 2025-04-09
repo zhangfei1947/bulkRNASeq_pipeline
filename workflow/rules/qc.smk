@@ -17,7 +17,6 @@ rule fastp_qc:
         mem_mb = 4096
     shell:
         """
-module load GCC/11.2.0 fastp/0.23.2
 fastp --in1 {input.r1} --in2 {input.r2} \
     --out1 {output.r1_clean} --out2 {output.r2_clean} \
     -j {output.json} -h {output.html} \
@@ -57,7 +56,6 @@ rule duprate_plot:
         pipepath = config['pipepath']
     shell:
         """
-module load GCC/12.2.0 OpenMPI/4.1.4 R/4.3.1
 export R_LIBS_USER="/scratch/group/lilab/software/R_library/4.3"
 Rscript {params.pipepath}/scripts/duprate.plot.R {input} {output}
         """
