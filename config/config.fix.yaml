@@ -15,7 +15,7 @@ singularity-args: "--bind /data"
 
 
 default-resources:
-  runtime: 60
+  runtime: "60m"
   mem_mb: 4096
   nodes: 1
   ntasks: 1
