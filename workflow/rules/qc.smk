@@ -1,4 +1,4 @@
-localrules: qc_summary, duprate_plot
+localrules: fastp_qc, qc_summary, duprate_plot
 
 rule fastp_qc:
     input:

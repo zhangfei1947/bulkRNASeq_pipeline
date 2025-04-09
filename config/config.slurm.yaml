@@ -18,7 +18,7 @@ default-resources:
 
 
 printshellcmds: true
-verbose: false
+verbose: true
 
 
 use-singularity: true
