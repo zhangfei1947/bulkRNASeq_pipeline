@@ -1,4 +1,4 @@
-configfile: f"{config["pipepath"]}/config/config.slurm.yaml"
+configfile: f"{config['pipepath']}/config/config.slurm.yaml"
 
 print(config)
 
