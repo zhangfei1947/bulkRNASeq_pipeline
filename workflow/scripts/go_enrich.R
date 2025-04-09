@@ -1,17 +1,11 @@
 library(clusterProfiler)
 library(org.Dm.eg.db)
 library(ggplot2)
-
-#input_file <- snakemake@input$diff
-#output_file <- snakemake@output$res
-#output_pdf <- snakemake@output$pdf
-#output_png <- snakemake@output$png
-
-args <- commandArgs(trailingOnly=TRUE)
-input_file <- args[1]
-output_file <- args[2]
-output_pdf <- args[3]
-output_png <- args[4]
+ 
+input_file <- snakemake@input$diff
+output_file <- snakemake@output$res
+output_pdf <- snakemake@output$pdf
+output_png <- snakemake@output$png
 
 gene_list <- row.names(read.table(input_file, header=TRUE, sep="\t"))
 

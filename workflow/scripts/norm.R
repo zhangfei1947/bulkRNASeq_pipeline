@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 
-rc_file <- snakemake@input
+rc_file <- snakemake@input[[1]]
 anno_file <- snakemake@params$anno
 sample <- snakemake@params$sample
 group <- snakemake@params$group

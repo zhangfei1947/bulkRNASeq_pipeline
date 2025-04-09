@@ -3,12 +3,11 @@
 library(DESeq2)
 library(EnhancedVolcano)
 
-args <- commandArgs(trailingOnly = TRUE)
-rc_file <- args[1]
-sample <- args[2]
-group <- args[3]
-cmp_info <- args[4]
-outpath <- args[5]
+rc_file <- snakemake@input$counts
+sample <- snakemake@params$sample
+group <- snakemake@params$group
+cmp_info <- snakemake@params$comparison
+outpath <- snakemake@params$outpath
 
 sample <- strsplit(sample, ",")[[1]]
 group <- strsplit(group, ",")[[1]]
