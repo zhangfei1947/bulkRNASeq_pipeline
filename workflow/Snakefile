@@ -1,5 +1,7 @@
 configfile: "../config/config.slurm.yaml"
 
+print(config)
+
 rule all:
     input:
         "02.QC_fastp/QC_summary_table.tsv",
