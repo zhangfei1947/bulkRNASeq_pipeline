@@ -3,10 +3,6 @@ configfile: "config/config.fix.yaml"
 ## singularity container
 container: "/scratch/group/lilab/Phil/RNASeq_container.sif"
 
-rule all:
-    input:
-        get_final_output()
-
 ## include modules
 # softlink rawdata 
 include: "rules/preprocess.smk"
@@ -31,3 +27,7 @@ include: "rules/venn.smk"
 
 # go enrichment analysis
 include: "rules/go.smk"
+
+rule all:
+    input:
+        get_final_output()
