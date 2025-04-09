@@ -1,7 +1,6 @@
 
-args <- commandArgs(trailingOnly = TRUE)
-qc_table <- snakemake@input
-outplot <- snakemake@output
+qc_table <- snakemake@input[[1]]
+outplot <- snakemake@output[[1]]
 
 data <- read.table(qc_table, header=TRUE, sep="\t")
 
