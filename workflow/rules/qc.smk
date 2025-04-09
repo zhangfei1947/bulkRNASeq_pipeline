@@ -13,10 +13,10 @@ rule fastp_qc:
         "logs/qc/{sample}.log"
     threads: 2
     resources:
-        runtime: "60m",
-        mem_mb: 4096,
-        nodes: 1,
-        ntasks: 1,
+        runtime="60m",
+        mem_mb=4096,
+        nodes=1,
+        ntasks=1,
         cpus_per_task = 2,
         mem_mb = 4096
     shell:
