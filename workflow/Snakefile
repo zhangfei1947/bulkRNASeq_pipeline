@@ -2,10 +2,10 @@ configfile: "/scratch/group/lilab/Phil/bulkRNASeq_pipeline/config/config.fix.yam
 
 #configfile: "config.yaml"
 
-#rule all:
-#    input:
-#        "02.QC_fastp/QC_summary_table.tsv",
-#        "02.QC_fastp/duprate.boxplot.png",
+rule all:
+    input:
+        "02.QC_fastp/QC_summary_table.tsv",
+        "02.QC_fastp/duprate.boxplot.png",
 #        "03.Alignment_hisat2/mapping.summary",
 #        "03.Alignment_hisat2/mappingrate.boxplot.png",
 #        "04.Quant_featureCounts/counts_raw.tsv",
@@ -26,20 +26,20 @@ include: "rules/preprocess.smk"
 # rawdata quality control
 include: "rules/qc.smk"
 
-# mapping to reference genome
-include: "rules/align.smk"
-
-# gene expression quantification
-include: "rules/quant.smk"
-
-# row readcount normalization, sample correlation, PCA
-include: "rules/normalize.smk"
-
-# differential gene expression
-include: "rules/dge.smk"
-
-# plot venn diagram
-include: "rules/venn.smk"
-
-# go enrichment analysis
-include: "rules/go.smk"
+## mapping to reference genome
+#include: "rules/align.smk"
+#
+## gene expression quantification
+#include: "rules/quant.smk"
+#
+## row readcount normalization, sample correlation, PCA
+#include: "rules/normalize.smk"
+#
+## differential gene expression
+#include: "rules/dge.smk"
+#
+## plot venn diagram
+#include: "rules/venn.smk"
+#
+## go enrichment analysis
+#include: "rules/go.smk"
