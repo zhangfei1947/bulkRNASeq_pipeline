@@ -53,5 +53,5 @@ rule duprate_plot:
         "02.QC_fastp/duprate.boxplot.png"
     container: None
     script:
-        "scripts/duprate.plot.R {input} {output}"
+        "scripts/duprate.plot.R"
 
