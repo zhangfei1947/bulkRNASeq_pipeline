@@ -1,4 +1,4 @@
-configfile: "config/config.fix.yaml"
+configfile: "../config/config.fix.yaml"
 
 ## singularity container
 container: "/scratch/group/lilab/Phil/RNASeq_container.sif"
