@@ -6,6 +6,7 @@ use-conda: false
 keep-going: true
 rerun-incomplete: true
 restart-times: 1
+cores: 2
 
 
 default-resources:
