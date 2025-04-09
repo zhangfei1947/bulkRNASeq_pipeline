@@ -20,8 +20,6 @@ rule hisat2_align:
         splicesites = config['genome']['splicesites']
     shell:
         """
-        module load GCC/13.2.0  OpenMPI/4.1.6 HISAT2/2.2.1 SAMtools/1.21
-
         hisat2 -x {params.index} --known-splicesite-infile {params.splicesites} \
             -p {threads} \
             --rna-strandness FR \
@@ -56,14 +54,8 @@ rule mapping_plot:
         "03.Alignment_hisat2/mapping.summary"
     output:
         "03.Alignment_hisat2/mappingrate.boxplot.png"
-    params:
-        pipepath = config['pipepath']
-    shell:
-        """
-module load GCC/12.2.0 OpenMPI/4.1.4 R/4.3.1
-export R_LIBS_USER="/scratch/group/lilab/software/R_library/4.3"
-Rscript {params.pipepath}/scripts/maprate.plot.R {input} {output}
-        """
+    script:
+        "../scripts/maprate.plot.R"
 
 
 

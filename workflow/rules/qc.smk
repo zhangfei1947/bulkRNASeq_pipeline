@@ -30,8 +30,6 @@ rule qc_summary:
         "02.QC_fastp/QC_summary_table.tsv"
     shell:
         """
-export PATH="/scratch/group/lilab/software/jq:$PATH"
-
 echo -e "Sample\tReads_brfore\tReads_after\tQ20_R1_before\tQ20_R2_before\tQ20_R1_after\tQ20_R2_after\tduplication_rate\tinsert_size" > {output}
 for f in 02.QC_fastp/reports/*json; do
     sample=$(basename $f .json)
@@ -52,11 +50,6 @@ rule duprate_plot:
         "02.QC_fastp/QC_summary_table.tsv"
     output:
         "02.QC_fastp/duprate.boxplot.png"
-    params:
-        pipepath = config['pipepath']
-    shell:
-        """
-export R_LIBS_USER="/scratch/group/lilab/software/R_library/4.3"
-Rscript {params.pipepath}/scripts/duprate.plot.R {input} {output}
-        """
+    script:
+        "Rscript ../scripts/duprate.plot.R"
 

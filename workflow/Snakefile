@@ -1,6 +1,3 @@
-#configfile: f"{config['pipepath']}/config/config.slurm.yaml"
-
-print(config)
 
 rule all:
     input:
