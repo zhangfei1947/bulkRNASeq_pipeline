@@ -20,15 +20,15 @@ rule hisat2_align:
         splicesites = config['genome']['splicesites']
     shell:
         """
-        hisat2 -x {params.index} --known-splicesite-infile {params.splicesites} \
-            -p {threads} \
-            --rna-strandness FR \
-            --summary-file {output[1]} \
-            --no-unal \
-            -1 {input.r1} -2 {input.r2} 2> {log} |
-        samtools view -@ {threads} -Sb |
-        samtools sort -@ {threads} -o {output[0]}
-        samtools index {output[0]}
+hisat2 -x {params.index} --known-splicesite-infile {params.splicesites} \
+    -p {threads} \
+    --rna-strandness FR \
+    --summary-file {output[1]} \
+    --no-unal \
+    -1 {input.r1} -2 {input.r2} 2> {log} |
+samtools view -@ {threads} -Sb |
+samtools sort -@ {threads} -o {output[0]}
+samtools index {output[0]}
         """
 
 rule hisat2_summary:

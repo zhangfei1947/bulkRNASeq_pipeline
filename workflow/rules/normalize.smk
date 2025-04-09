@@ -10,13 +10,8 @@ rule normalize_counts:
         anno = config['genome']['geneloc'],
         sample = ",".join( config['samples'].keys() ),
         group = ",".join( sample['group'] for sample in config["samples"].values() ),
-        pipepath = config['pipepath']
-    shell:
-        """
-module load GCC/12.2.0 OpenMPI/4.1.4 R/4.3.1
-export R_LIBS_USER="/scratch/group/lilab/software/R_library/4.3"
-Rscript {params.pipepath}/scripts/norm.R {input} {output.normalized} {output.fpkm} {params.anno} {params.sample} {params.group}
-        """
+    script:
+        "../scripts/norm.R {input} {output.normalized} {output.fpkm} {params.anno} {params.sample} {params.group}"
 
 
 rule corr_heat:

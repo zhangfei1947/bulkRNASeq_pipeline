@@ -51,5 +51,5 @@ rule duprate_plot:
     output:
         "02.QC_fastp/duprate.boxplot.png"
     script:
-        "Rscript ../scripts/duprate.plot.R"
+        "../scripts/duprate.plot.R"
 

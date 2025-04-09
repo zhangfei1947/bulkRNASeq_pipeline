@@ -1,12 +1,11 @@
 #!/usr/bin/env Rscript
-args <- commandArgs(trailingOnly = TRUE)
 
-rc_file <- args[1]
-anno_file <- args[4]
-sample <- args[5]
-group <- args[6]
-output_norm <- args[2]
-output_fpkm <- args[3]
+rc_file <- snakemake@input
+anno_file <- snakemake@params$anno
+sample <- snakemake@params$sample
+group <- snakemake@params$group
+output_norm <- snakemake@output$normalized
+output_fpkm <- snakemake@output$fpkm
 
 library(DESeq2)
 
