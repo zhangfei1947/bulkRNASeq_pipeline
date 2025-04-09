@@ -2,22 +2,22 @@ configfile: "/scratch/group/lilab/Phil/bulkRNASeq_pipeline/config/config.fix.yam
 
 #configfile: "config.yaml"
 
-rule all:
-    input:
-        "02.QC_fastp/QC_summary_table.tsv",
-        "02.QC_fastp/duprate.boxplot.png",
-        "03.Alignment_hisat2/mapping.summary",
-        "03.Alignment_hisat2/mappingrate.boxplot.png",
-        "04.Quant_featureCounts/counts_raw.tsv",
-        "04.Quant_featureCounts/counts_filter.tsv",
-        "04.Quant_featureCounts/fc.summary",
-        "04.Quant_featureCounts/assignment_stacked_barplot.png",
-        "05.Normalization_DESeq2/counts_normalized.tsv",
-        expand("05.Normalization_DESeq2/corr.heatmap.{corr_name}.png", corr_name=config["corr"].keys()),
-        expand("05.Normalization_DESeq2/pca.plot.{color_scheme}.png", color_scheme=config["pca_color"].keys()),
-        expand("06.Diff_Expression/{comp}.deseq2_results.tsv", comp=config["diff_comparisons"]),
-        expand("07.Venn/{group}.venn.png", group=config["venn"].keys()),
-        expand("08.Enrichment/{comparison}.go_enrichment.tsv", comparison=config["GO"])
+#rule all:
+#    input:
+#        "02.QC_fastp/QC_summary_table.tsv",
+#        "02.QC_fastp/duprate.boxplot.png",
+#        "03.Alignment_hisat2/mapping.summary",
+#        "03.Alignment_hisat2/mappingrate.boxplot.png",
+#        "04.Quant_featureCounts/counts_raw.tsv",
+#        "04.Quant_featureCounts/counts_filter.tsv",
+#        "04.Quant_featureCounts/fc.summary",
+#        "04.Quant_featureCounts/assignment_stacked_barplot.png",
+#        "05.Normalization_DESeq2/counts_normalized.tsv",
+#        expand("05.Normalization_DESeq2/corr.heatmap.{corr_name}.png", corr_name=config["corr"].keys()),
+#        expand("05.Normalization_DESeq2/pca.plot.{color_scheme}.png", color_scheme=config["pca_color"].keys()),
+#        expand("06.Diff_Expression/{comp}.deseq2_results.tsv", comp=config["diff_comparisons"]),
+#        expand("07.Venn/{group}.venn.png", group=config["venn"].keys()),
+#        expand("08.Enrichment/{comparison}.go_enrichment.tsv", comparison=config["GO"])
 
 # Include modules
 # softlink rawdata 
