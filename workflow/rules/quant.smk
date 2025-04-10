@@ -56,5 +56,5 @@ rule fc_plot:
     output:
         "04.Quant_featureCounts/assignment_stacked_barplot.png"
     script:
-        "../scripts/fc.assign.plot.R {input} {output}"
+        "../scripts/fc.assign.plot.R"
 
