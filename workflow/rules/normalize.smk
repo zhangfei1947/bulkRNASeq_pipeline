@@ -11,7 +11,7 @@ rule normalize_counts:
         sample = ",".join( config['samples'].keys() ),
         group = ",".join( sample['group'] for sample in config["samples"].values() ),
     script:
-        "../scripts/norm.R {input} {output.normalized} {output.fpkm} {params.anno} {params.sample} {params.group}"
+        "../scripts/norm.R"
 
 
 rule corr_heat:

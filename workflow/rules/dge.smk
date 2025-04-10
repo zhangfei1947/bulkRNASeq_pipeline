@@ -11,5 +11,5 @@ rule diff_analysis:
         sample = ",".join( config['samples'].keys() ),
         group = ",".join( sample['group'] for sample in config["samples"].values() ),
         outpath = "06.Diff_Expression/",
-    shell:
+    script:
         "../scripts/diff.R" 
