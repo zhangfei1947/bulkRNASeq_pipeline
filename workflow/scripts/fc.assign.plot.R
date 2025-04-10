@@ -1,7 +1,7 @@
+#!/usr/bin/env Rscript
 
-args <- commandArgs(trailingOnly = TRUE)
-fc_table <- args[1]
-outplot <- args[2]
+fc_table <- snakemake@input[[1]]
+outplot <- snakemake@output[[1]]
 
 data <- read.table(fc_table, header=TRUE, sep="\t")
 

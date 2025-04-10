@@ -16,21 +16,19 @@ rule featurecounts:
         mem_mb = 400*len(config['samples'])
     shell:
         """
-module load GCC/12.3.0 Subread/2.0.8
-
 featureCounts \
--T {resources.cpus_per_task} \
--a {params.anno} \
--o {output[0]} \
--F GTF -t exon -g gene_id \
--s 2 \
--p \
---countReadPairs \
--O -M --fraction \
--P -B \
--d 40 \
--D 800 \
-{input} > {log} 2>&1
+ -T {resources.cpus_per_task} \
+ -a {params.anno} \
+ -o {output[0]} \
+ -F GTF -t exon -g gene_id \
+ -s 2 \
+ -p \
+ --countReadPairs \
+ -O -M --fraction \
+ -P -B \
+ -d 40 \
+ -D 800 \
+ {input} > {log} 2>&1
         """
 
 rule fc_filter:
@@ -38,12 +36,8 @@ rule fc_filter:
         "04.Quant_featureCounts/counts_raw.tsv"
     output:
         "04.Quant_featureCounts/counts_filter.tsv"
-    params:
-        pipepath = config['pipepath']
-    shell:
-        """
-{params.pipepath}/scripts/raw.rc.filter.sh {input} {output}
-        """
+    script:
+        "../scripts/raw.rc.filter.sh"
 
 rule fc_summary:
     input:
@@ -61,12 +55,6 @@ rule fc_plot:
         "04.Quant_featureCounts/counts_raw.tsv.summary"
     output:
         "04.Quant_featureCounts/assignment_stacked_barplot.png"
-    params:
-        pipepath = config['pipepath']
-    shell:
-        """
-module load GCC/12.2.0 OpenMPI/4.1.4 R/4.3.1
-export R_LIBS_USER="/scratch/group/lilab/software/R_library/4.3"
-Rscript {params.pipepath}/scripts/fc.assign.plot.R {input} {output}
-        """
+    script:
+        "../scripts/fc.assign.plot.R {input} {output}"
 
