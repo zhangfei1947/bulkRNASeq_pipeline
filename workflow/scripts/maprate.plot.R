@@ -1,7 +1,7 @@
 
 args <- commandArgs(trailingOnly = TRUE)
-map_table <- snakemake@input
-outplot <- snakemake@output
+map_table <- snakemake@input[[1]]
+outplot <- snakemake@output[[1]]
 
 png(outplot, width=500, height=600, res=120)
 
