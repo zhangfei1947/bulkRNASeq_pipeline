@@ -5,8 +5,6 @@ rule go_enrichment:
         outfile = "08.Enrichment/{comparison}.go_enrichment.tsv",
         pdf = "08.Enrichment/{comparison}.go_enrichment.pdf",
         png = "08.Enrichment/{comparison}.go_enrichment.png"
-    params:
-        pipepath = config['pipepath']
     log:
         "logs/go/{comparison}.log"
     script:
