@@ -14,8 +14,8 @@ rule all:
         expand("05.Normalization_DESeq2/corr.heatmap.{corr_name}.png", corr_name=config["corr"].keys()),
         expand("05.Normalization_DESeq2/pca.plot.{color_scheme}.png", color_scheme=config["pca_color"].keys()),
         expand("06.Diff_Expression/{comp}.deseq2_results.tsv", comp=config["diff_comparisons"]),
-        #expand("07.Venn/{group}.venn.png", group=config["venn"].keys()),
-        #expand("08.Enrichment/{comparison}.go_enrichment.tsv", comparison=config["GO"])
+        expand("07.Venn/{group}.venn.png", group=config["venn"].keys()),
+        expand("08.Enrichment/{comparison}.go_enrichment.tsv", comparison=config["GO"])
 
 # Include modules
 # softlink rawdata 
