@@ -12,5 +12,4 @@ pipeline_dir=/scratch/group/lilab/Phil/bulkRNASeq_pipeline
 snakemake \
  --snakefile ${pipeline_dir}/workflow/Snakefile \
  --configfile config.yaml \
- --profile ${pipeline_dir}/config \
- --executor cluster-generic
+ --profile ${pipeline_dir}/config
