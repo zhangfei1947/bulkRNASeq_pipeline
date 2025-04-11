@@ -1,4 +1,4 @@
-localrules: fc_summary, fc_plot
+localrules: fc_filter, fc_summary, fc_plot
 
 rule featurecounts:
     input:

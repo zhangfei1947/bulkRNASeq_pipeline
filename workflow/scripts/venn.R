@@ -1,8 +1,8 @@
 library(VennDiagram)
 
-input_files <- snakemake@input[[1]]    
-labels <- snakemake@params$labels     
-output_file <- snakemake@output[[1]]   
+input_files <- strsplit(snakemake@params$input_files, ",")[[1]]
+labels <- strsplit(snakemake@params$labels, ",")[[1]]
+output_file <- snakemake@output[[1]]
 
 read_diff_genes <- function(file) {
   df <- read.delim(file, sep = "\t")
