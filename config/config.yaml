@@ -18,7 +18,6 @@ printshellcmds: true
 verbose: false
 
 use-singularity: true
-singularityfile: "/scratch/group/lilab/Phil/RNASeq_container.sif"
 #singularity-prefix: ".snakemake/singularity"
 #singularity-args: "--bind /data"
 
