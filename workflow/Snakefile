@@ -1,4 +1,4 @@
-container: "/scratch/user/philzhang/RNASeq_container.sif"
+container: config["singularityfile"]
 
 rule all:
     input:

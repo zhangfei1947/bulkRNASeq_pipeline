@@ -1,6 +1,6 @@
 
 cluster-generic-submit-cmd: "sbatch -t {resources.runtime} --mem {resources.mem_mb} --nodes {resources.nodes} --ntasks {resources.ntasks} --cpus-per-task {resources.cpus_per_task} -J {rule} -o logs/{rule}.%j.out -e logs/{rule}.%j.err"
-jobs: 50
+jobs: 1
 latency-wait: 60
 use-conda: false
 keep-going: true
@@ -17,7 +17,8 @@ default-resources:
 printshellcmds: true
 verbose: false
 
-use-singularity: false
+use-singularity: true
+singularityfile: "/scratch/group/lilab/Phil/RNASeq_container.sif"
 #singularity-prefix: ".snakemake/singularity"
 #singularity-args: "--bind /data"
 
