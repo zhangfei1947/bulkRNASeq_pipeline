@@ -12,7 +12,7 @@ rule featurecounts:
         anno = config['genome']['annotation']
     resources:
         runtime = 360,
-        cpus_per_task = int(len(config['samples'])/3),
+        cpus_per_task = int(len(config['samples'])/3)+1,
         mem_mb = 400*len(config['samples'])
     shell:
         """
