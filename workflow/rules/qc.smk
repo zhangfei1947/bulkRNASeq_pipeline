@@ -28,6 +28,7 @@ rule qc_summary:
         expand("02.QC_fastp/reports/{sample}.json", sample=config['samples'])
     output:
         "02.QC_fastp/QC_summary_table.tsv"
+    container: None
     shell:
         """
 echo -e "Sample\tReads_brfore\tReads_after\tQ20_R1_before\tQ20_R2_before\tQ20_R1_after\tQ20_R2_after\tduplication_rate\tinsert_size" > {output}

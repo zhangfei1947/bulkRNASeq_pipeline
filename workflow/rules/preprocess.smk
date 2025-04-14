@@ -9,6 +9,7 @@ rule make_links:
         r2 = "01.Rawdata/{sample}/{sample}_R2.fq.gz"
     log:
         "logs/prep/{sample}.log"
+    container: None
     shell:
         """
         ln -sf {input.r1} {output.r1} > {log} 2>&1

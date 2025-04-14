@@ -36,6 +36,7 @@ rule hisat2_summary:
         expand("03.Alignment_hisat2/{sample}/{sample}.summary", sample=config['samples'])
     output:
         "03.Alignment_hisat2/mapping.summary"
+    container: None
     shell:
         """
 echo "Sample Name\tTotal Reads\tExact Match Rate\tMultiple Match Rate" > {output}

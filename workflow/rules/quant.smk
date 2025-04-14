@@ -36,6 +36,7 @@ rule fc_filter:
         "04.Quant_featureCounts/counts_raw.tsv"
     output:
         "04.Quant_featureCounts/counts_filter.tsv"
+    container: None
     script:
         "../scripts/raw.rc.filter.sh"
 
@@ -44,6 +45,7 @@ rule fc_summary:
         "logs/quant/featurecounts.log"
     output:
         "04.Quant_featureCounts/fc.summary"
+    container: None
     shell:
         """
 echo "sample\tassignrate" > {output}
