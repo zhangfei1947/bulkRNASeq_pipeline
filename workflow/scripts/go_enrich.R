@@ -3,7 +3,7 @@ library(org.Dm.eg.db)
 library(ggplot2)
  
 input_file <- snakemake@input$diff
-output_file <- snakemake@output$res
+output_file <- snakemake@output$outfile
 output_pdf <- snakemake@output$pdf
 output_png <- snakemake@output$png
 
