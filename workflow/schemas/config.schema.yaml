@@ -20,7 +20,7 @@ properties:
           - read1
           - read2
           - group
-      additionalProperties: false
+        additionalProperties: false
   corr:
     type: array
     items:
