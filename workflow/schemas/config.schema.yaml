@@ -46,9 +46,13 @@ properties:
     items:
       type: string
   venn:
-    type: object
-    additionalProperties:
-      type: string
+    type: array
+    items:
+      type: object
+      minProperties: 1
+      maxProperties: 1
+      additionalProperties:
+        type: string
   GO:
     type: array
     items:
