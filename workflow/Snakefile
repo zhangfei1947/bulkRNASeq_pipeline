@@ -2,6 +2,8 @@ container: "/scratch/group/lilab/Phil/RNASeq_container.sif"
 
 samples = [item.keys() for item in config["samples"]]
 
+print(samples)
+
 all_input = ["02.QC_fastp/QC_summary_table.tsv", 
         "02.QC_fastp/duprate.boxplot.png",
         "03.Alignment_hisat2/mapping.summary",
