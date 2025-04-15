@@ -10,6 +10,8 @@ all_input = ["02.QC_fastp/QC_summary_table.tsv",
         "04.Quant_featureCounts/assignment_stacked_barplot.png",
         "05.Normalization_DESeq2/counts_normalized.tsv"]
 
+print(config)
+
 if "corr" in config:
     all_input.append(expand("05.Normalization_DESeq2/corr.heatmap.{corr_name}.png", corr_name=config["corr"].keys()))
 if "pca_color" in config:
