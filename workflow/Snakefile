@@ -1,8 +1,6 @@
 container: "/scratch/group/lilab/Phil/RNASeq_container.sif"
 
-samples = [item.key() for item in config["samples"]]
-
-print(samples)
+samples = [key for dictionary in a for key in dictionary.keys()]
 
 all_input = ["02.QC_fastp/QC_summary_table.tsv", 
         "02.QC_fastp/duprate.boxplot.png",
