@@ -1,6 +1,6 @@
 container: "/scratch/group/lilab/Phil/RNASeq_container.sif"
 
-samples = [item.keys() for item in config["samples"]]
+samples = [item.key() for item in config["samples"]]
 
 print(samples)
 
