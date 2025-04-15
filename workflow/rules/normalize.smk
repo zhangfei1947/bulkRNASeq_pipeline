@@ -8,8 +8,8 @@ rule normalize_counts:
         fpkm = "05.Normalization_DESeq2/fpkm_matrix.tsv"
     params:
         anno = config['genome']['geneloc'],
-        sample = ",".join( samples ),
-        group = ",".join([spdict.values()["group"] for spdict in config["samples"]])
+        sample = ",".join( config['samples'].keys() ),
+        group = ",".join( sample['group'] for sample in config["samples"].values() ),
     script:
         "../scripts/norm.R"
 
