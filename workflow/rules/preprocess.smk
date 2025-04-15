@@ -1,5 +1,9 @@
 localrules: make_links
 
+from snakemake.utils import validate
+
+validate(config, schema="../schemas/config.schema.yaml")
+
 rule make_links:
     input:
         r1 = lambda wildcards: config['samples'][wildcards.sample]['read1'],

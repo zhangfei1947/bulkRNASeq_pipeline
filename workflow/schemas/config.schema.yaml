@@ -1,0 +1,74 @@
+$schema: "http://json-schema.org/draft-06/schema#"
+$id: "https://example.com/snakemake-config-schema.json"
+description: "Snakemake configuration file schema"
+type: object
+properties:
+  samples:
+    type: array
+    items:
+      type: object
+      properties:
+        read1:
+          type: string
+        read2:
+          type: string
+        group:
+          type: string
+      required:
+        - read1
+        - read2
+        - group
+      additionalProperties: false
+  corr:
+    type: array
+    items:
+      type: object
+      minProperties: 1
+      maxProperties: 1
+      additionalProperties:
+        type: string
+  pca_color:
+    type: array
+    items:
+      type: object
+      minProperties: 1
+      maxProperties: 1
+      additionalProperties:
+        type: object
+        additionalProperties:
+          type: string
+  diff_comparisons:
+    type: array
+    items:
+      type: string
+  venn:
+    type: object
+    additionalProperties:
+      type: string
+  GO:
+    type: array
+    items:
+      type: string
+  genome:
+    type: object
+    properties:
+      index:
+        type: string
+      annotation:
+        type: string
+      splicesites:
+        type: string
+      geneloc:
+        type: string
+      geneanno:
+        type: string
+    required:
+      - index
+      - annotation
+      - splicesites
+      - geneloc
+      - geneanno
+    additionalProperties: false
+required:
+  - samples
+additionalProperties: false
