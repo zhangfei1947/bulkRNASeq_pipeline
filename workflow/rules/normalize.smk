@@ -9,7 +9,7 @@ rule normalize_counts:
     params:
         anno = config['genome']['geneloc'],
         sample = ",".join( samples ),
-        group = ",".join( groups ),
+        group = ",".join([config["samples"][sample]["group"] for sample in samples]),
     script:
         "../scripts/norm.R"
 
