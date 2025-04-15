@@ -2,7 +2,7 @@ localrules: fc_filter, fc_summary, fc_plot
 
 rule featurecounts:
     input:
-        expand("03.Alignment_hisat2/{sample}/{sample}.bam", sample=config['samples'])
+        expand("03.Alignment_hisat2/{sample}/{sample}.bam", sample=samples)
     output:
         "04.Quant_featureCounts/counts_raw.tsv",
         "04.Quant_featureCounts/counts_raw.tsv.summary"
@@ -12,8 +12,8 @@ rule featurecounts:
         anno = config['genome']['annotation']
     resources:
         runtime = 360,
-        cpus_per_task = int(len(config['samples'])/3)+1,
-        mem_mb = 400*len(config['samples'])
+        cpus_per_task = int(len(samples)/3)+1,
+        mem_mb = 400*len(samples)
     shell:
         """
 featureCounts \

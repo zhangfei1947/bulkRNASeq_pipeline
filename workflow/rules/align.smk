@@ -33,7 +33,7 @@ samtools index {output[0]}
 
 rule hisat2_summary:
     input:
-        expand("03.Alignment_hisat2/{sample}/{sample}.summary", sample=config['samples'])
+        expand("03.Alignment_hisat2/{sample}/{sample}.summary", sample=samples)
     output:
         "03.Alignment_hisat2/mapping.summary"
     container: None
