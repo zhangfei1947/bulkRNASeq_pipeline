@@ -4,8 +4,8 @@ description: "Snakemake configuration file schema"
 type: object
 properties:
   samples:
-    type: array
-    items:
+    type: object
+    additionalProperties:
       type: object
       minProperties: 1
       maxProperties: 1
