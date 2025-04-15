@@ -2,7 +2,7 @@ localrules: fc_filter, fc_summary, fc_plot
 
 rule featurecounts:
     input:
-        expand("03.Alignment_hisat2/{sample}/{sample}.bam", sample=samples)
+        expand("03.Alignment_hisat2/{sample}/{sample}.bam", sample=config["samples"].keys())
     output:
         "04.Quant_featureCounts/counts_raw.tsv",
         "04.Quant_featureCounts/counts_raw.tsv.summary"
