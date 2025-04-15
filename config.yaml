@@ -1,3 +1,13 @@
+### Required parameters
+
+## Sample information
+
+#samples:
+#  sample_name
+#  read1: read1_path
+#  read2: read2_path
+#  group: group_name_this_sample_belongs_to
+
 samples:
   d1_grp_b1:
     read1: /scratch/group/lilab/Lilab_Seq_Data/250107_novogene_RNAseq/d1_grp_b1/d1_grp_b1_1.fq.gz
@@ -96,14 +106,28 @@ samples:
     read2: /scratch/group/lilab/Lilab_Seq_Data/250107_novogene_RNAseq/d7_iso_h3/d7_iso_h3_2.fq.gz
     group: d7_iso_h
 
+
+### Optional parameters
+## Correlation heatmap between samples
+
+#corr:
+#  plot_title: group1,group2,...
+
 corr: 
-  #groups
+  all: d1_grp_h,d7_grp_h,d1_iso_h,d7_iso_h,d1_grp_b,d7_grp_b,d1_iso_b,d7_iso_b
   tissue_head: d1_grp_h,d7_grp_h,d1_iso_h,d7_iso_h
   tissue_body: d1_grp_b,d7_grp_b,d1_iso_b,d7_iso_b
 
+## PCA analysis
+
+#pca_color:
+#  color_schema:
+#    color_group1: group,group,...
+#    color_group2: group,group,...
+#    ...
+
 pca_color: 
   day:
-    #groups
     day1: d1_grp_h,d1_iso_h,d1_grp_b,d1_iso_b
     day7: d7_grp_h,d7_iso_h,d7_grp_b,d7_iso_b
   tisstrt:
@@ -112,25 +136,48 @@ pca_color:
     bodygrp: d1_grp_b,d7_grp_b
     bodyiso: d1_iso_b,d7_iso_b
 
-#treatment_vs_control
-diff_comparisons: ["d7_grp_h_vs_d1_grp_h", "d7_iso_h_vs_d1_iso_h", "d7_iso_h_vs_d7_grp_h", "d1_iso_h_vs_d1_grp_h", "d7_grp_b_vs_d1_grp_b", "d7_iso_b_vs_d1_iso_b", "d7_iso_b_vs_d7_grp_b", "d1_iso_b_vs_d1_grp_b"]
+## Differential gene expression
+
+#diff_comparisons:
+#  - treatment_vs_control
+#  - treatment_vs_control
+#  ...
+
+diff_comparisons: 
+  - d7_grp_h_vs_d1_grp_h
+  - d7_iso_h_vs_d1_iso_h
+  - d7_iso_h_vs_d7_grp_h
+  - d1_iso_h_vs_d1_grp_h
+  - d7_grp_b_vs_d1_grp_b
+  - d7_iso_b_vs_d1_iso_b
+  - d7_iso_b_vs_d7_grp_b
+  - d1_iso_b_vs_d1_grp_b
+
+## Venn diagram between differential gene expression comparisons
+
+#venn:
+#  venn_plot_title: comparison1,comparison2,... (no more than 4 four comparisons)
 
 venn:
-  #2-4 gene sets(comparisons)
   day7_head: d7_grp_h_vs_d1_grp_h,d7_iso_h_vs_d1_iso_h
   day7_body: d7_grp_b_vs_d1_grp_b,d7_iso_b_vs_d1_iso_b
   iso_head: d7_iso_h_vs_d1_iso_h,d1_iso_h_vs_d1_grp_h
 
-#comparisons
-GO: ["d7_iso_h_vs_d7_grp_h", "d7_iso_b_vs_d7_grp_b"]
+## GO enrichment of differential expressed gene lists
+#GO:
+#  - comparison1
+#  - comparison2
+
+GO:
+  - d7_iso_h_vs_d7_grp_h
+  - d7_iso_b_vs_d7_grp_b
 
 
+### Genome reference used
 genome:
   index: /scratch/group/lilab/Genome_Reference/dmel_r6.55/dmel_r6.55
   annotation: /scratch/group/lilab/Genome_Reference/dmel_r6.55/dmel-all-r6.55.gtf
   splicesites: /scratch/group/lilab/Genome_Reference/dmel_r6.55/dmel-all-r6.55.hisat2.splice_sites
   geneloc: /scratch/group/lilab/Genome_Reference/dmel_r6.55/gene_annotation.csv
   geneanno: /scratch/group/lilab/Genome_Reference/dmel_r6.55/gene_annotations.tsv
-
-pipepath: /scratch/group/lilab/Phil/bulkRNASeq_pipeline
 
