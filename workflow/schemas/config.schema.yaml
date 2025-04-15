@@ -6,7 +6,9 @@ properties:
   samples:
     type: array
     items:
-      type: array
+      type: object
+      minProperties: 1
+      maxProperties: 1
       additionalProperties:
         type: object
         properties:
