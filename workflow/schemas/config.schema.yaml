@@ -22,11 +22,7 @@ properties:
   corr:
     type: object
     additionalProperties:
-      type: object
-      minProperties: 1
-      maxProperties: 1
-      additionalProperties:
-        type: string
+      type: sting
   pca_color:
     type: object
     additionalProperties:
@@ -34,9 +30,7 @@ properties:
       minProperties: 1
       maxProperties: 1
       additionalProperties:
-        type: object
-        additionalProperties:
-          type: string
+        type: string
   diff_comparisons:
     type: array
     items:
@@ -44,11 +38,9 @@ properties:
   venn:
     type: object
     additionalProperties:
-      type: object
+      type: string
       minProperties: 1
       maxProperties: 1
-      additionalProperties:
-        type: string
   GO:
     type: array
     items:
