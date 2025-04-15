@@ -7,22 +7,18 @@ properties:
     type: object
     additionalProperties:
       type: object
-      minProperties: 1
-      maxProperties: 1
-      additionalProperties:
-        type: object
-        properties:
-          read1:
-            type: string
-          read2:
-            type: string
-          group:
-            type: string
-        required:
-          - read1
-          - read2
-          - group
-        additionalProperties: false
+      properties:
+        read1:
+          type: string
+        read2:
+          type: string
+        group:
+          type: string
+      required:
+        - read1
+        - read2
+        - group
+      additionalProperties: false
   corr:
     type: array
     items:
