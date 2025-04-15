@@ -6,7 +6,7 @@ properties:
   samples:
     type: array
     items:
-      type: object
+      type: array
       additionalProperties:
         type: object
         properties:
