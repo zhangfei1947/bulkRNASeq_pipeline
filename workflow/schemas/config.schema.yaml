@@ -20,16 +20,16 @@ properties:
         - group
       additionalProperties: false
   corr:
-    type: array
-    items:
+    type: object
+    additionalProperties:
       type: object
       minProperties: 1
       maxProperties: 1
       additionalProperties:
         type: string
   pca_color:
-    type: array
-    items:
+    type: object
+    additionalProperties:
       type: object
       minProperties: 1
       maxProperties: 1
@@ -42,8 +42,8 @@ properties:
     items:
       type: string
   venn:
-    type: array
-    items:
+    type: object
+    additionalProperties:
       type: object
       minProperties: 1
       maxProperties: 1
