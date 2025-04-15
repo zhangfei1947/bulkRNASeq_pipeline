@@ -22,7 +22,7 @@ properties:
   corr:
     type: object
     additionalProperties:
-      type: sting
+      type: string
   pca_color:
     type: object
     additionalProperties:
