@@ -27,8 +27,6 @@ properties:
     type: object
     additionalProperties:
       type: object
-      minProperties: 1
-      maxProperties: 1
       additionalProperties:
         type: string
   diff_comparisons:
