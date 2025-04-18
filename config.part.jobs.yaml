@@ -65,7 +65,7 @@ samples:
 #corr:
 #  plot_title: group1,group2,...
 
-#corr: 
+corr: {} 
 #  all: d1_grp_h,d7_grp_h,d1_iso_h,d7_iso_h
 
 ## PCA analysis
