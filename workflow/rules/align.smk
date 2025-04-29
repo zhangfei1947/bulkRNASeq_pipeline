@@ -22,7 +22,7 @@ rule hisat2_align:
         """
 hisat2 -x {params.index} --known-splicesite-infile {params.splicesites} \
     -p {threads} \
-    --rna-strandness FR \
+    --rna-strandness RF \
     --summary-file {output[1]} \
     --no-unal \
     -1 {input.r1} -2 {input.r2} 2> {log} |
