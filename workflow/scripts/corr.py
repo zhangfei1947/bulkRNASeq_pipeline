@@ -10,6 +10,8 @@ def main():
     outfile = snakemake.output
     target_groups = snakemake.params.target_groups
     sample_mapping = snakemake.params.sample_mapping
+    print(target_groups)
+    print(sample_mapping)
 
     df = pd.read_csv(filepath, sep='\t', index_col=0)
     df_log2 = np.log2(df + 0.01)
