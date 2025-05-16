@@ -6,6 +6,8 @@ sample <- snakemake@params$sample
 group <- snakemake@params$group
 output_norm <- snakemake@output$normalized
 output_fpkm <- snakemake@output$fpkm
+output_vst <- snakemake@output$vst
+
 
 library(DESeq2)
 
@@ -23,6 +25,10 @@ dds <- DESeqDataSetFromMatrix(countData=count_matrix, colData=sample_info, desig
 dds <- estimateSizeFactors(dds)
 normalized_counts <- counts(dds, normalized=TRUE)
 write.table(normalized_counts, file=paste0(output_norm), sep="\t", quote=F, col.names=T, row.names=T)
+
+#vst normalization for heatmap plot
+vsd <- vst(dds)
+write.table(round(assay(vsd),2), file=output_vst, sep="\t", quote=F, col.names=T, row.names=T)
 
 #cal FPKM
 library(edgeR)

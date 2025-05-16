@@ -6,6 +6,7 @@ rule normalize_counts:
     output:
         normalized = "05.Normalization_DESeq2/counts_normalized.tsv",
         fpkm = "05.Normalization_DESeq2/fpkm_matrix.tsv"
+        vst = "05.Normalization_DESeq2/vst.rc.tsv"
     params:
         anno = config['genome']['geneloc'],
         sample = ",".join( config['samples'].keys() ),
