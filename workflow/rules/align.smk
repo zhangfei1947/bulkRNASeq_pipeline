@@ -25,6 +25,10 @@ hisat2 -x {params.index} --known-splicesite-infile {params.splicesites} \
     --rna-strandness RF \
     --summary-file {output[1]} \
     --no-unal \
+    --rg-id RG1 \
+    --rg SM:{sample} \
+    --rg LB:{sample} \
+    --rg PL:ILLUMINA \
     -1 {input.r1} -2 {input.r2} 2> {log} |
 samtools view -@ {threads} -Sb |
 samtools sort -@ {threads} -o {output[0]}
