@@ -26,8 +26,8 @@ hisat2 -x {params.index} --known-splicesite-infile {params.splicesites} \
     --summary-file {output[1]} \
     --no-unal \
     --rg-id RG1 \
-    --rg SM:{sample} \
-    --rg LB:{sample} \
+    --rg SM:{wildcards.sample} \
+    --rg LB:{wildcards.sample} \
     --rg PL:ILLUMINA \
     -1 {input.r1} -2 {input.r2} 2> {log} |
 samtools view -@ {threads} -Sb |
