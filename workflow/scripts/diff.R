@@ -15,8 +15,7 @@ group <- strsplit(group, ",")[[1]]
 sample_info <- cbind(sample, group)
 gene_info <- read.table(file=gene_info, header=TRUE, sep=",", row.names=1)
 #create gene symbol mapping
-mapping <- gene_info[, 1, drop = TRUE]
-names(mapping) <- rownames(gene_info)
+map <- setNames(gene_info[[1]], rownames(gene_info))
 
 count_matrix <- read.table(rc_file, sep="\t", header=TRUE, row.names=1)
 count_matrix <- round(count_matrix)
@@ -44,10 +43,7 @@ for (i in 1:length(cmp_info)){
 	res_sig <-  resOrdered[sigs, ]
 	write.table(as.data.frame(res_sig), file=paste0(outpath, cmp_info[[i]] ,".FC2.padj0.05.deseq2_results.tsv"), quote=FALSE, sep="\t", col.names=TRUE, row.names=TRUE)
 	# mapping gene symbol
-	geneIDs <- rownames(res)
-	genesymbols <- mapping[geneIDs]
-	print(genesymbols)
-	genesymbols <- ifelse(is.na(genesymbols), geneIDs, genesymbols)
+	genesymbols <- ifelse(rownames(res) %in% names(map), map[rownames(res)], rownames(res))
 
 	vocplot <- EnhancedVolcano(
 		res,
