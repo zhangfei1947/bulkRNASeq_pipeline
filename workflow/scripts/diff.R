@@ -46,6 +46,7 @@ for (i in 1:length(cmp_info)){
 	# mapping gene symbol
 	geneIDs <- rownames(res)
 	genesymbols <- mapping[geneIDs]
+	print(genesymbols)
 	genesymbols <- ifelse(is.na(genesymbols), geneIDs, genesymbols)
 
 	vocplot <- EnhancedVolcano(
