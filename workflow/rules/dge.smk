@@ -10,6 +10,7 @@ rule diff_analysis:
         comparison = ",".join(config["diff_comparisons"]),
         sample = ",".join( config['samples'].keys() ),
         group = ",".join( sample['group'] for sample in config["samples"].values() ),
+        anno = config['genome']['geneloc'],
         outpath = "06.Diff_Expression/",
     script:
         "../scripts/diff.R" 
