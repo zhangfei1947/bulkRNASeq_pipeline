@@ -13,7 +13,7 @@ outpath <- snakemake@params$outpath
 sample <- strsplit(sample, ",")[[1]]
 group <- strsplit(group, ",")[[1]]
 sample_info <- cbind(sample, group)
-gene_info <- read.table(file=gene_info, header=TRUE, sep=",", row.names=1)
+gene_info <- read.csv(file=gene_info, header=TRUE, row.names=1)
 #create gene symbol mapping
 map <- setNames(gene_info[[1]], rownames(gene_info))
 
